@@ -20,7 +20,7 @@
    <v-spacer></v-spacer>
 
 
-   <v-btn icon to="/">
+   <v-btn icon to="/query">
      <v-icon>mdi-magnify</v-icon>
    </v-btn>
 
@@ -34,11 +34,7 @@
    <v-app-bar-nav-icon class="hidden-md-and-up"  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
  </v-toolbar>
 
- <v-sheet
- height="400"
- class="overflow-hidden"
- style="position: relative;"
->
+
  <v-card 
   height = "500"
   width = "200"
@@ -63,7 +59,7 @@
     </v-list>
   </v-navigation-drawer>
  </v-card>
-</v-sheet>
+
 
 
 </nav>

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Registration from '../views/Registration'
+import EventsFinder from '../components/EventsFinder'
 
 Vue.use(VueRouter)
 
@@ -23,6 +24,11 @@ const routes = [
     path:'/registration',
     name:'Registration',
     component:Registration
+  },
+  {
+    path:'/query',
+    name:'EventsFinder',
+    component:EventsFinder
   }
 ]
 
