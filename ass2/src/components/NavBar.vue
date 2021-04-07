@@ -1,37 +1,67 @@
 <template>
- <v-card
-    color = "blue lighten-2"
-    flat
-    height="200px"
-    tile
+ <nav
  >
- <v-toolbar dense>
-   <v-app-bar-nav-icon></v-app-bar-nav-icon>
-   <v-toolbar-title>Mock Eventfinda</v-toolbar-title>
+ <v-toolbar dense dark app>
+  
+   <v-toolbar-title class="text-uppercase grey--">
+     <span class="font-weight-light">Mock</span> 
+     <span class="green--text">EventFinda</span></v-toolbar-title>
+     <v-divider 
+      class="mx-4"
+      vertical
+      :inset = "inset"
+      >
+    </v-divider>
+
+
+
    <v-spacer></v-spacer>
+   <v-hover><v-btn dark class="hidden-sm-and-down"><router-link to="/home">Home</router-link></v-btn></v-hover>
+    
+
+   <!-- <v-divider 
+     vertical
+     class="mx-4"
+     :inset = "inset"
+     >
+   </v-divider> -->
+
+   <v-btn class="hidden-sm-and-down"><router-link to="/home">Events</router-link></v-btn>
 
    <v-btn icon>
      <v-icon>mdi-magnify</v-icon>
    </v-btn>
 
    <v-btn icon>
-    <v-icon>mdi-account-circle</v-icon>
+    <v-avatar 
+      size = "32"
+      color = "grey"
+    ></v-avatar>
    </v-btn>
-
-   <v-btn>
-     <v-icon>mdi-dots-vertical</v-icon>
-   </v-btn>
-
+   <v-app-bar-nav-icon class="hidden-md-and-up" v-on:click="toggle()"></v-app-bar-nav-icon>
  </v-toolbar>
 
- </v-card>
+ <v-navigation-drawer v-model="drawer" app class="green">
+   <p>test</p>
+ </v-navigation-drawer>
+
+</nav>
 </template>
   
   <script>
+
     export default {
       name: 'NavBar',
   
-      data: () => ({})
+      data: () => ({
+        drawer:false
+      }),
+
+      methods:{
+        toggle(){
+          this.drawer = !this.drawer
+        }
+      }
     }
   </script>
   
