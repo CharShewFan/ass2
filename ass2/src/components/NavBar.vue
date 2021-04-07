@@ -1,7 +1,7 @@
 <template>
  <nav
  >
- <v-toolbar dense dark app>
+ <v-toolbar  dark app>
   
    <v-toolbar-title class="text-uppercase grey--">
      <span class="font-weight-light">Mock</span> 
@@ -12,38 +12,59 @@
       :inset = "inset"
       >
     </v-divider>
-
+    <v-btn   class = "hidden-sm-and-down mr-3 flat dark" to="/" >Home</v-btn>
+    
+    <v-btn   class = "hidden-sm-and-down mr-2 flat dark" to="/" >Events</v-btn>
 
 
    <v-spacer></v-spacer>
-   <v-hover><v-btn dark class="hidden-sm-and-down"><router-link to="/home">Home</router-link></v-btn></v-hover>
-    
 
-   <!-- <v-divider 
-     vertical
-     class="mx-4"
-     :inset = "inset"
-     >
-   </v-divider> -->
 
-   <v-btn class="hidden-sm-and-down"><router-link to="/home">Events</router-link></v-btn>
-
-   <v-btn icon>
+   <v-btn icon to="/">
      <v-icon>mdi-magnify</v-icon>
    </v-btn>
 
-   <v-btn icon>
+   <v-btn icon to = "/registration"> 
     <v-avatar 
       size = "32"
       color = "grey"
     ></v-avatar>
    </v-btn>
-   <v-app-bar-nav-icon class="hidden-md-and-up" v-on:click="toggle()"></v-app-bar-nav-icon>
+
+   <v-app-bar-nav-icon class="hidden-md-and-up"  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
  </v-toolbar>
 
- <v-navigation-drawer v-model="drawer" app class="green">
-   <p>test</p>
- </v-navigation-drawer>
+ <v-sheet
+ height="400"
+ class="overflow-hidden"
+ style="position: relative;"
+>
+ <v-card 
+  height = "500"
+  width = "200"
+  class="hidden-md-and-up"
+  
+ 
+ >
+  <v-navigation-drawer absolute temporary class="primary white--text">
+    <v-list-item>
+      <v-list-item-content>
+        <v-list-item-tile class="title">Navigation bar</v-list-item-tile>
+      </v-list-item-content>
+    </v-list-item>
+
+    <v-divider></v-divider>
+    <v-list dense nav> 
+      <v-list-item v-for="item in navList" :key="item.title" link="item.link">
+        <v-list-item-content>
+          <v-list-title>{{item.title}}</v-list-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+ </v-card>
+</v-sheet>
+
 
 </nav>
 </template>
@@ -54,7 +75,8 @@
       name: 'NavBar',
   
       data: () => ({
-        drawer:false
+        drawer:false,
+        navList:[{"title":"Home","link":"/"},{"title":"Events","link":"/"},{"title":"User","link":"/"}]
       }),
 
       methods:{
