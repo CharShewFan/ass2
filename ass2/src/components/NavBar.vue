@@ -14,7 +14,7 @@
     </v-divider>
     <v-btn   class = "hidden-sm-and-down mr-3 flat dark" to="/" >Home</v-btn>
     
-    <v-btn   class = "hidden-sm-and-down mr-2 flat dark" to="/query" >Events</v-btn>
+    <v-btn   class = "hidden-sm-and-down mr-2 flat dark" to="/event" >Events</v-btn>
 
 
    <v-spacer></v-spacer>
@@ -42,6 +42,7 @@
         <v-list-item-title class="title">Navigation bar</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
+
 
     <v-divider></v-divider>
     <v-list dense nav>
@@ -71,7 +72,7 @@
         selectedItem: 0,
         navList:[
             {"title":"Home","link":"/"},
-            {"title":"Events","link":"/query"},
+            {"title":"Events","link":"/event"},
             {"title":"User","link":"/registration"},
             {"title":"Edit","link":"/editUser"},
             {"title":"LogIn","link":"/login"}

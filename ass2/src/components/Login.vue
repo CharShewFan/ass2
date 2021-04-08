@@ -8,8 +8,8 @@
     <v-text-field label="E-mail" type="email" clearable solo></v-text-field>
     <v-text-field label="Password" type="password" clearable solo></v-text-field>
 
-    <div class="float-right mr-5">
-      <v-btn type="button" class="warning mr-5">Reset</v-btn>
+    <div class="right mr-5">
+      <v-btn type="button" class="warning">Reset</v-btn>
       <v-btn type="button" class="primary" >Submit</v-btn>
     </div>
 

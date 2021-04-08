@@ -1,8 +1,15 @@
 <template>
   <div>
-   <v-container>
-     
-   </v-container>
+  <div  class="grey lighten-4 text-center banner-1"   >
+    <v-chip class="error mx-auto " >Find Events</v-chip>
+  </div>
+    <v-divider></v-divider>
+    <div  class="grey lighten-3 text-center banner-1"   >
+      <v-chip class="primary mx-auto " >Join Now</v-chip>
+    </div>
+
+
+
   </div>
   
 
@@ -21,3 +28,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.banner-1{
+  height: 500px;
+  line-height: 500px;
+}
+</style>

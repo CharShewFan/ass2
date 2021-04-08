@@ -2,9 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Registration from '../views/Registration'
-import EventsFinder from '../components/EventsFinder'
+//import EventsFinder from '../components/EventsFinder'
 import Edit from '../components/EditUser'
 import Login from '../components/Login'
+import Event from '../views/Event'
 
 
 Vue.use(VueRouter)
@@ -29,9 +30,9 @@ const routes = [
     component:Registration
   },
   {
-    path:'/query',
-    name:'EventsFinder',
-    component:EventsFinder
+    path:'/event',
+    name:'Event',
+    component:Event
   },
   {
     path:'/editUser',

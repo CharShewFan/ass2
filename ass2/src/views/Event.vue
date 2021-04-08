@@ -1,7 +1,10 @@
 <template>
     <v-container class="mt-8">
         <EventFinder />
-        <EventDisplay/>
+
+      <EventCard></EventCard>
+      <v-divider></v-divider>
+
     </v-container>
 
 
@@ -12,15 +15,17 @@
 
 <script>
     import EventFinder from '@/components/EventsFinder'
-    import EventDisplay from '@/components/EventDisplay'
+   //import EventDisplay from '@/components/EventDisplay'
+    import EventCard from "@/components/EventCard";
     export default{
         name:"Event",
         data:()=>{
             
         },
         components:{
-            EventDisplay,
-            EventFinder
+
+            EventFinder,
+            EventCard
         },
         methods:{
 

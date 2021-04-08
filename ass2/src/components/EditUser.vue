@@ -29,11 +29,11 @@
     </v-col>
 
     <v-col cols="12" sm = "12" md = "6" lg = "6" xl="6">
-      <v-btn @click = "clear()" class="warning float-right ">Clear</v-btn>
+      <v-btn @click = "clear()" class="warning right ">Clear</v-btn>
     </v-col>
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
-      <v-btn @click = "submit()" class="primary float-right">Submit</v-btn>
+      <v-btn @click = "submit()" class="primary right">Submit</v-btn>
     </v-col>
 
   </v-row>

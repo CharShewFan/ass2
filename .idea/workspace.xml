@@ -20,16 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="611b9b06-2fa5-48eb-a15a-26808a6fd809" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ass2/src/components/EditUser.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ass2/src/components/Login.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/App.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/components/EventDisplay.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/EventDisplay.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ass2/src/components/EventCard.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ass2/src/views/Query.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/components/EditUser.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/EditUser.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/components/EventDisplay.vue" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/components/EventsFinder.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/EventsFinder.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/components/Login.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/Login.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/components/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/NavBar.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/router/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/views/Event.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/views/Event.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/views/Registration.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/views/Registration.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/views/User.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/views/User.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/views/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,6 +67,7 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -75,7 +77,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1617845015432</updated>
-      <workItem from="1617845016500" duration="9037000" />
+      <workItem from="1617845016500" duration="15513000" />
     </task>
     <servers />
   </component>
@@ -93,10 +95,22 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="finished search component and eventCard component,modify home page ,change route to more precised path" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished search component and eventCard component,modify home page ,change route to more precised path" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="1143" y="411" key="#ESLint" timestamp="1617877429564">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1143" y="411" key="#ESLint/0.0.1920.1080@0.0.1920.1080" timestamp="1617877429564" />
+    <state x="359" y="88" key="SettingsEditor" timestamp="1617882592286">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="359" y="88" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1617882592286" />
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1617882610312">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1617882610312" />
   </component>
 </project>
