@@ -24,8 +24,8 @@ export default {
    NavBar,
   },
 
-  data: () => ({
+  data (){
     
-  }),
+  },
 };
 </script>

@@ -3,6 +3,9 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Registration from '../views/Registration'
 import EventsFinder from '../components/EventsFinder'
+import Edit from '../components/EditUser'
+import Login from '../components/Login'
+
 
 Vue.use(VueRouter)
 
@@ -29,6 +32,16 @@ const routes = [
     path:'/query',
     name:'EventsFinder',
     component:EventsFinder
+  },
+  {
+    path:'/editUser',
+    name:'Edit',
+    component:Edit
+  },
+  {
+    path:'/login',
+    name:'Login',
+    component: Login
   }
 ]
 

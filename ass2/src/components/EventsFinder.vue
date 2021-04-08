@@ -1,6 +1,9 @@
 <template>
 <div >
   <!-- query search box -->
+  <v-card flat class="mt-8">
+    <v-card-title>Search Events</v-card-title>
+  </v-card>
 <v-form class="mx-auto">
     <v-container >
       <v-row>
@@ -11,7 +14,7 @@
             md = "4"
             lg = "3"
         >
-        <v-text-field label = "query string" v-model = "query"> </v-text-field>
+        <v-text-field label = "query string" v-model = "query" clearable solo> </v-text-field>
         </v-col>
 
         <v-col  
@@ -19,7 +22,7 @@
         sm = "12"
         md = "4"
         lg = "3">
-        <v-select :items="items" label="catergory id" v-model = "cid_1"></v-select>
+        <v-select :items="items" label="catergory id" v-model = "cid_1" clearable solo></v-select>
         </v-col>
 
         <v-col  
@@ -27,7 +30,7 @@
         sm = "12"
         md = "4"
         lg = "3">
-        <v-select :items="items" label="catergory id" v-model = "cid_2"></v-select>
+        <v-select :items="items" label="catergory id" v-model = "cid_2" clearable solo></v-select>
         </v-col>
 
       </v-row>
@@ -39,7 +42,7 @@
         md = "4"
         lg = "3"
         >
-        <v-text-field label="startIndex" v-model="startIndex"></v-text-field>
+        <v-text-field label="startIndex" v-model="startIndex" clearable solo></v-text-field>
       </v-col >
           
       <v-col
@@ -49,19 +52,20 @@
       lg = "3"
       >
     
-      <v-text-field label="count" v-model = "count"></v-text-field>
+      <v-text-field label="count" v-model = "count" clearable solo></v-text-field>
     </v-col>
 
     <v-col cols = "12" sm = "12" md = "4" lg = "3">
-      <v-select :item = "sortByList" label="sort by" v-model="sortBy"></v-select>
+      <v-select :items = "sortByList" label="sort by" v-model="sortBy" clearable solo></v-select>
     </v-col>
       </v-row>
 
+      <v-btn  @click="search()" class="mx-auto mt-8 float-right primary">
+        search
+      </v-btn>
     </v-container>
 
-    <v-btn  @click="search()" class="mx-auto">
-      search
-    </v-btn>
+
 
 
 </v-form>
@@ -100,12 +104,10 @@
               "startIndex":this.startIndex,
               "count":this.count,
               "sortBy":this.sortBy
-
-
           })
          
           
-        }
+        },
       }
     }
   </script>

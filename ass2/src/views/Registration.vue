@@ -1,6 +1,12 @@
 <template>
     <v-container>
-    <form>
+      <v-card flat>
+        <v-card-title>
+          Sign Up
+        </v-card-title>
+      </v-card>
+
+    <v-form class="ml-3">
       <v-text-field
         v-model="firstname"
         :error-messages="nameErrors"
@@ -41,9 +47,9 @@
     ></v-text-field>
 
   
-      <v-btn class="mr-4" @click="submit">submit</v-btn>
-      <v-btn @click="clear">clear</v-btn>
-    </form>
+      <v-btn class="mr-4 primary" @click="submit">submit</v-btn>
+      <v-btn class="warning" @click="clear">clear</v-btn>
+    </v-form>
 
     <v-card v-if = "userInfo.length > 0">
         <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>

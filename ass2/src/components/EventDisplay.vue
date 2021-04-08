@@ -2,7 +2,7 @@
 <div>
     <v-container>
         <v-card mx="auto" max-width="344">
-            <v-img src=""https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img>
+<!--            <v-img src=""https://cdn.vuetifyjs.com/images/cards/sunshine.jpg" height="200px"></v-img>-->
             <v-card-title>Hello world #here binding the event name</v-card-title>
             <v-card-subtitle>event id here</v-card-subtitle>
             <v-card-subtitle>event location here</v-card-subtitle>
@@ -17,7 +17,7 @@
             <v-btn icon @click = "show = !show"><v-icon>{{show? 'mdi-chevron-up':'mdi-chevron-down'}}</v-icon></v-btn>
             </v-card-actions>
 
-            <v-expend-transition>
+
                 <div v-show="show">
                     <v-divider></v-divider>
                     <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
@@ -25,23 +25,31 @@
                          Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
                     </v-card-text>
                 </div>
-            </v-expend-transition>
+
         </v-card>
     </v-container>
 </div>
 </template>
 
 <script>
-    import axios from 'axios'
+
     export default{
         name:"EventDisplay",
-        data:()=>{
-            
+        data(){
+            return{
+
+            }
         },
         methods:{
             join(){
                 return null
             },
+          leave(){
+              return null
+          },
+        },
+        props:{
+
         }
     }
 </script>

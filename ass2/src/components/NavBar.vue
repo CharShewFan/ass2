@@ -3,9 +3,9 @@
  >
  <v-toolbar  dark app>
   
-   <v-toolbar-title class="text-uppercase grey--">
+   <v-toolbar-title class="text-uppercase grey--" >
      <span class="font-weight-light">Mock</span> 
-     <span class="green--text">EventFinda</span></v-toolbar-title>
+     <span class="light-blue--text" >EventFinda </span></v-toolbar-title>
      <v-divider 
       class="mx-4"
       vertical
@@ -35,29 +35,26 @@
  </v-toolbar>
 
 
- <v-card 
-  height = "500"
-  width = "200"
-  class="hidden-md-and-up"
-  v-if = "drawer"
- >
-  <v-navigation-drawer  absolute temporary class="primary white--text" transition="slide-x-transition"  v-model="drawer">
-    <v-list-item>
+
+  <v-navigation-drawer app absolute temporary class=" dark--text" transition="slide-x-transition"  v-model="drawer">
+    <v-list-item >
       <v-list-item-content>
-        <v-list-item-tile class="title">Navigation bar</v-list-item-tile>
+        <v-list-item-title class="title">Navigation bar</v-list-item-title>
       </v-list-item-content>
     </v-list-item>
 
     <v-divider></v-divider>
-    <v-list dense nav> 
-      <v-list-item v-for="item in navList" :key="item.title" link="item.link">
+    <v-list dense nav>
+      <v-list-item-group v-model="selectedItem" color="primary">
+      <v-list-item v-for="item in navList" :key="item" :to=item.link>
         <v-list-item-content>
-          <v-list-title>{{item.title}}</v-list-title>
+          <v-list-item-title>{{item.title}}</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
+      </v-list-item-group>
     </v-list>
   </v-navigation-drawer>
- </v-card>
+
 
 
 
@@ -71,7 +68,14 @@
   
       data: () => ({
         drawer:false,
-        navList:[{"title":"Home","link":"/"},{"title":"Events","link":"/"},{"title":"User","link":"/"}]
+        selectedItem: 0,
+        navList:[
+            {"title":"Home","link":"/"},
+            {"title":"Events","link":"/query"},
+            {"title":"User","link":"/registration"},
+            {"title":"Edit","link":"/editUser"},
+            {"title":"LogIn","link":"/login"}
+          ]
       }),
 
       methods:{

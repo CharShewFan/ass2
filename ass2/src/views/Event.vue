@@ -1,7 +1,7 @@
 <template>
-    <v-container>
-        <EventFinda/>
-        <EventsDisplay/>
+    <v-container class="mt-8">
+        <EventFinder />
+        <EventDisplay/>
     </v-container>
 
 
@@ -11,8 +11,8 @@
 
 
 <script>
-    import EventFinder from '../components/EventFinder'
-    import EventDisplay from '../components/EventsDisplay'
+    import EventFinder from '@/components/EventsFinder'
+    import EventDisplay from '@/components/EventDisplay'
     export default{
         name:"Event",
         data:()=>{
