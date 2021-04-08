@@ -14,7 +14,7 @@
     </v-divider>
     <v-btn   class = "hidden-sm-and-down mr-3 flat dark" to="/" >Home</v-btn>
     
-    <v-btn   class = "hidden-sm-and-down mr-2 flat dark" to="/" >Events</v-btn>
+    <v-btn   class = "hidden-sm-and-down mr-2 flat dark" to="/query" >Events</v-btn>
 
 
    <v-spacer></v-spacer>
@@ -31,7 +31,7 @@
     ></v-avatar>
    </v-btn>
 
-   <v-app-bar-nav-icon class="hidden-md-and-up"  @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+   <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggle()"></v-app-bar-nav-icon>
  </v-toolbar>
 
 
@@ -39,10 +39,9 @@
   height = "500"
   width = "200"
   class="hidden-md-and-up"
-  
- 
+  v-if = "drawer"
  >
-  <v-navigation-drawer absolute temporary class="primary white--text">
+  <v-navigation-drawer  absolute temporary class="primary white--text" transition="slide-x-transition"  v-model="drawer">
     <v-list-item>
       <v-list-item-content>
         <v-list-item-tile class="title">Navigation bar</v-list-item-tile>
