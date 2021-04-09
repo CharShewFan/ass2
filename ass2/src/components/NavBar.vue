@@ -59,7 +59,17 @@
 
     <v-divider></v-divider>
 
-    <v-list dense nav v-show="loginStatus">
+    <v-list dense nav v-show="!isLogIn">
+      <v-list-item-group>
+        <v-list-item  to="/login">
+          <v-list-item-title>Log In</v-list-item-title>
+        </v-list-item>
+      </v-list-item-group>
+    </v-list>
+
+    <v-divider></v-divider>
+
+    <v-list dense nav v-show="isLogIn">
       <v-list-item-group>
         <v-list-item @click="logOut" to="/">
           <v-list-item-title>Log out</v-list-item-title>
@@ -76,7 +86,8 @@
 </template>
   
   <script>
-  import axios from 'axios'
+  //import axios from 'axios'
+  import {mapGetters,mapActions} from 'vuex';
 
     export default {
       name: 'NavBar',
@@ -89,49 +100,19 @@
             {"title":"Events","link":"/event"},
             {"title":"User","link":"/registration"},
             {"title":"Edit","link":"/editUser"},
-            {"title":"LogIn","link":"/login"}
+
           ],
-        loginStatus:false
+
       }),
-
-      mounted() {
-        this.check()
-      },
-
-      updated() {
-        this.check()
-      },
+      computed:mapGetters(["isLogIn"]),
 
       methods:{
+        ...mapActions(["logOut"]),
+
         toggle(){
           this.drawer = !this.drawer
         },
 
-        async logOut(){
-          let token = sessionStorage.getItem('token')
-          // const options = {
-          //   method: 'POST',
-          //   headers: { 'X-Authorization':token},
-          //   url:'/users/logout',
-          // };
-          // await axios(options);
-
-          axios.defaults.headers = {"X-Authorization": token}
-
-          await axios.post('/users/logout')
-          this.loginStatus = false
-          sessionStorage.clear()
-          console.log("log out now!")
-        },
-
-        check(){
-          let token = sessionStorage.getItem('token')
-          let id = sessionStorage.getItem('userId')
-          if(token !== undefined && id !== undefined){
-            this.loginStatus = true
-          }
-          return this.loginStatus
-        }
       }
     }
   </script>

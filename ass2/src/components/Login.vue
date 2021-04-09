@@ -15,7 +15,7 @@
 
     <div class="right mr-5">
       <v-btn type="button" class="warning">Reset</v-btn>
-      <v-btn type="button" class="primary" @click="login" >Submit</v-btn>
+      <v-btn type="button" class="primary" @click="Login" >Submit</v-btn>
       <v-btn type="button" @click="$router.go(-1)">back</v-btn>
     </div>
 
@@ -25,7 +25,10 @@
 </template>
 
 <script>
-import axios from 'axios'
+//import axios from 'axios'
+import {mapGetters} from 'vuex'
+import axios from "axios";
+
 export default {
  name: "Login",
   data(){
@@ -35,37 +38,63 @@ export default {
      error:false,
      errorMessages:"",
      type:""
+
    }
   },
+
+  computed: mapGetters(["isLogIn"]),
+
   methods:{
+    async Login(){
 
-   async login(){
-     try{
-       let response = await axios.post("/users/login",{"email":this.email,"password":this.password})
-        //console.log(response.data.token)
-       console.log(response.status)
+          console.log(this.email)
+          console.log(this.password)
+          try{
+            let response = await axios.post("/users/login",{"email":this.email,"password":this.password})
+            console.log(this.email)
+            console.log(this.password)
 
-        let token = response.data.token
-        let userId = response.data.userId
-        sessionStorage.setItem("token",token);
-        sessionStorage.setItem("userId",userId)
-       this.error = true
-       this.errorMessages = "login in successfully"
-       this.type = "success"
+            console.log(response.status)
 
-     }catch(err){
-       console.log("miss me?")
-       console.log(err)
-       this.error = true;
-       this.errorMessages = "please input valid email or correct password"
-       this.type = "warning"
-      }
-     }
-   },
+            let token = response.data.token
+            let userId = response.data.userId
+            sessionStorage.setItem("token",token);
+            sessionStorage.setItem("userId",userId)
+            this.error = true
+            this.type = "success"
+            this.errorMessages = "login in successfully"
+            this.$store.commit('setStatus',true);
+
+          }catch(err)
+          {
+            console.log("miss me?")
+            console.log(err)
+            this.error = true;
+            this.errorMessages = "please input valid email or correct password"
+            this.type = "warning"
+
+
+          }
+    }
+
+  }
+
+
+
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
 </script>
 
 <style scoped>
