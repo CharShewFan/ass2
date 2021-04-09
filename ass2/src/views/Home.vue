@@ -1,11 +1,11 @@
 <template>
   <div>
   <div  class="grey lighten-4 text-center banner-1"   >
-    <v-chip class="error mx-auto " >Find Events</v-chip>
+    <v-chip class="error mx-auto " to="/event">Find Events</v-chip>
   </div>
     <v-divider></v-divider>
     <div  class="grey lighten-3 text-center banner-1"   >
-      <v-chip class="primary mx-auto " >Join Now</v-chip>
+      <v-chip class="primary mx-auto " to="/registration" >Join Now</v-chip>
     </div>
 
 

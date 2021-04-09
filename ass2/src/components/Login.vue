@@ -63,7 +63,7 @@ export default {
             this.error = true
             this.type = "success"
             this.errorMessages = "login in successfully"
-            this.$store.commit('setStatus',true);
+            this.$store.commit('setStatus',true); //same as do it in action{}, setStatus is the function in mutation
 
           }catch(err)
           {

@@ -20,7 +20,7 @@
    <v-spacer></v-spacer>
 
 
-   <v-btn icon to="/query">
+   <v-btn icon to="/event">
      <v-icon>mdi-magnify</v-icon>
    </v-btn>
 
