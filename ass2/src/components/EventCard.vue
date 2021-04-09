@@ -119,8 +119,20 @@ export default {
 
       ],
       show: false,
+      page:"",
+      totalPage:[],
+      pageSize:5,
+      pageNumber:1,
+      dataShow:"",
+      currentPage:0
+
     }
-  }
+  },
+  //computed:{
+   // getPageNum(){
+   //    this.pageNumber = Math.ceil(this.events.length / this.pageSize)
+  //  }
+ // }
 }
 </script>
 

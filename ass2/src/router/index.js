@@ -7,6 +7,9 @@ import Edit from '../components/EditUser'
 import Login from '../components/Login'
 import Event from '../views/Event'
 
+import axios from 'axios'
+axios.defaults.baseURL = "http://localhost:4941/api/v1"
+//axios.defaults.withCredentials = true;
 
 Vue.use(VueRouter)
 
@@ -37,7 +40,12 @@ const routes = [
   {
     path:'/editUser',
     name:'Edit',
-    component:Edit
+    component:Edit,
+    beforeEnter:(to,from,next)=>{
+      let isAuthenticated = checkAuth()
+      if(!isAuthenticated) next({name:Login})
+      else next()
+    }
   },
   {
     path:'/login',
@@ -47,7 +55,34 @@ const routes = [
 ]
 
 const router = new VueRouter({
+  mode:"history",
   routes
 })
+
+// router.beforeEach((to,from,next)={
+//   if(to.name !== 'login' && !isAuthenticated) next
+// })
+
+function checkAuth(){
+  let isAuthenticated = false
+  let id = parseInt(sessionStorage.getItem("userId"))
+  let token = sessionStorage.getItem("token")
+  if(id !== undefined && token !== undefined){
+    const options = {
+      method: 'POST',
+      headers: { 'X-Authorization': token },
+      url:`/users/${id}`,
+    };
+    axios(options).then((response)=>{
+      if(response.data.email !== undefined){
+        isAuthenticated = true
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+  }
+  console.log(isAuthenticated)
+  return isAuthenticated
+}
 
 export default router

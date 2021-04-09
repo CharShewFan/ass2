@@ -49,6 +49,9 @@
   
       <v-btn class="mr-4 primary" @click="submit">submit</v-btn>
       <v-btn class="warning" @click="clear">clear</v-btn>
+      <v-btn class="info" to="/login">sign in</v-btn>
+      <v-btn type="button" @click="$router.go(-1)">back</v-btn>
+      <!--返回上一页-->
     </v-form>
 
     <v-card v-if = "userInfo.length > 0">
@@ -63,11 +66,13 @@
     import { validationMixin } from 'vuelidate'
     import { required, maxLength, email } from 'vuelidate/lib/validators'
     import axios from 'axios'
-  
+    //import Login from '@/components/Login';
+
     export default {
         name: 'Registration',
     components: {
      // NavBar
+      //Login
     },
       mixins: [validationMixin],
   
