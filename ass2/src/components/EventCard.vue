@@ -2,7 +2,7 @@
 <div>
 <v-container class="my-5">
   <v-row>
-    <v-col sm="12" md="4" lg="4" xl="4"  v-for="event in events" :key="event.title">
+    <v-col sm="12" md="4" lg="4" xl="4"  v-for="event in newList" :key="event.index" >
       <v-card>
         <v-img
             class="white--text align-end"
@@ -15,9 +15,12 @@
         <v-card-subtitle class="pb-4">{{event.category}}</v-card-subtitle>
 
         <v-card-text class="text--primary">
-          <div>{{event.date}}</div>
-          <div>{{event.location}}</div>
-          <div>{{event.organizer}}</div>
+          <div>capacity: {{event.capacity}}</div>
+<!--          <div>{{event.location}}</div>-->
+          <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
+          <div>attendants: {{event.numAcceptedAttendees}}</div>
+          <div>categories: {{event.categories.toString()}}</div>
+
         </v-card-text>
 
         <v-card-actions>
@@ -25,7 +28,7 @@
           <v-spacer></v-spacer>
           <v-btn icon @click="show = !show">
             <v-icon>{{show ? 'mdi-chevron-up':'mdi-chevron-down'}}</v-icon>
-          </v-btn>
+            </v-btn>
 
         </v-card-actions>
 
@@ -46,15 +49,15 @@
     </v-col>
   </v-row>
 
-  <div class="text-center">
+  <div class="text-center mt-15">
     <v-container>
       <v-row justify="center">
         <v-col cols="8">
           <v-container class="max-width">
             <v-pagination
-                v-model="page"
+                v-model="currentPage"
                 class="my-4"
-                :length="15"
+                :length="this.pageShown"
             ></v-pagination>
           </v-container>
         </v-col>
@@ -72,67 +75,61 @@
 
 
 <script>
+import {mapGetters,mapActions} from 'vuex'
+
 export default {
   name: "EventCard",
   data(){
     return{
-      events:[
-          {
-            "title":"mock1",
-            "category":"mock category",
-            "date":"2021-04-09",
-            "description":"  Lorem ipsum dolor sit amet, consectetur adipisicing elit. " +
-                "Alias, amet asperiores beatae blanditiis, culpa dolores eos, itaque laudantium minima nam nihil nostrum " +
-                "odio officia praesentium quam quibusdam reiciendis repellendus sunt. \n",
-            "organizer":"mock user1",
-            "location":"9 mock location rd holiday park"
-          },
-        {
-          "title":"mock2",
-          "category":"mock category",
-          "date":"2021-05-09",
-          "description":"  Lorem ipsum dolor sit amet, consectetur adipisicing elit. " +
-              "Alias, amet asperiores beatae blanditiis, culpa dolores eos, itaque laudantium minima nam nihil nostrum " +
-              "odio officia praesentium quam quibusdam reiciendis repellendus sunt. \n",
-          "organizer":"mock user2",
-          "location":"9 mock location rd holiday park"
-        },
-        {
-          "title":"mock3",
-          "category":"mock category",
-          "date":"2021-05-09",
-          "description":"  Lorem ipsum dolor sit amet, consectetur adipisicing elit. " +
-              "Alias, amet asperiores beatae blanditiis, culpa dolores eos, itaque laudantium minima nam nihil nostrum " +
-              "odio officia praesentium quam quibusdam reiciendis repellendus sunt. \n",
-          "organizer":"mock user1",
-          "location":"9 mock location rd holiday park"
-        },
-        {
-          "title":"mock5",
-          "date":"2021-05-09",
-          "description":"  Lorem ipsum dolor sit amet, consectetur adipisicing elit. " +
-              "Alias, amet asperiores beatae blanditiis, culpa dolores eos, itaque laudantium minima nam nihil nostrum " +
-              "odio officia praesentium quam quibusdam reiciendis repellendus sunt. \n",
-          "organizer":"mock user1",
-          "location":"9 mock location rd holiday park"
-        }
 
-      ],
       show: false,
-      page:"",
-      totalPage:[],
-      pageSize:5,
-      pageNumber:1,
-      dataShow:"",
-      currentPage:0
+      pageShown:0,
+      totalEvents : [],
+      numPerPage:5,
+      currentPage:1,
+      newList:[]
+
+
 
     }
   },
-  //computed:{
+
+  created() {
+    this.getEvents()
+  },
+
+  beforeMount() {
+
+  },
+
+  mounted() {
+    this.selectEvent()
+  },
+
+  computed:{
+    ...mapGetters(["allEvents","displayEvents"]),
+  },
    // getPageNum(){
-   //    this.pageNumber = Math.ceil(this.events.length / this.pageSize)
-  //  }
- // }
+   //    return this.pageNumber = Math.ceil(this.events.length / this.pageSize)
+   // }
+
+  methods:{
+    ...mapActions(["getEvents","selectEvent"]),
+
+    getPageNum(){
+      console.log(this.allEvents)
+      return this.pageShown = 5  //Math.ceil(this.allEvents.length / 5)
+    },
+
+    newArray(){
+      for(let i = 0; i < this.numPerPage; i ++){
+        this.newList.push(this.allEvents[i])
+      }
+      console.log(this.newList)
+      return this.newList
+    }
+
+  }
 }
 </script>
 

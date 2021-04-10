@@ -3,7 +3,7 @@
         <EventFinder />
 
       <EventCard></EventCard>
-      <v-divider></v-divider>
+
 
     </v-container>
 
@@ -20,7 +20,9 @@
     export default{
         name:"Event",
         data:()=>{
-            
+            return {
+
+            }
         },
         components:{
 

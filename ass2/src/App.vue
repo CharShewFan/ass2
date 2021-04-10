@@ -8,6 +8,7 @@
     <router-view></router-view>
 
     </v-main>
+    <Footer></Footer>
 
   </v-app>
 </template>
@@ -15,6 +16,7 @@
 <script>
 //import HelloWorld from './components/HelloWorld';
 import NavBar from './components/NavBar';
+import Footer from '@/components/Footer'
 
 
 export default {
@@ -22,10 +24,13 @@ export default {
 
   components: {
    NavBar,
+    Footer
   },
 
   data (){
-    
+    return {
+
+    }
   },
 };
 </script>

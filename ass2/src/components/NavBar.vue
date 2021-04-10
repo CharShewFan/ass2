@@ -1,7 +1,6 @@
 <template>
- <nav
- >
- <v-toolbar  dark app>
+ <nav>
+ <v-toolbar  dark >
   
    <v-toolbar-title class="text-uppercase grey--" >
      <span class="font-weight-light">Mock</span> 
@@ -48,7 +47,7 @@
 
     <v-list dense nav>
       <v-list-item-group v-model="selectedItem" color="primary">
-      <v-list-item v-for="item in navList" :key="item" :to=item.link>
+      <v-list-item v-for="item in navList" :key="item.index" :to=item.link>
 
         <v-list-item-content>
           <v-list-item-title>{{item.title}}</v-list-item-title>
