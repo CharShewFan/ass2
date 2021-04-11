@@ -1,8 +1,9 @@
 <template>
 <div>
 <v-container class="my-5">
+
   <v-row>
-    <v-col sm="12" md="4" lg="4" xl="4"  v-for="event in newList" :key="event.index" >
+    <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in totalEvents" :key="event.index" >
       <v-card>
         <v-img
             class="white--text align-end"
@@ -16,7 +17,6 @@
 
         <v-card-text class="text--primary">
           <div>capacity: {{event.capacity}}</div>
-<!--          <div>{{event.location}}</div>-->
           <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
           <div>attendants: {{event.numAcceptedAttendees}}</div>
           <div>categories: {{event.categories.toString()}}</div>
@@ -57,7 +57,7 @@
             <v-pagination
                 v-model="currentPage"
                 class="my-4"
-                :length="this.pageShown"
+                :length="this.pageLength"
             ></v-pagination>
           </v-container>
         </v-col>
@@ -65,6 +65,7 @@
     </v-container>
   </div>
 
+ <h1 class="mx-auto" >{{this.currentPage}}</h1>
 </v-container>
 
 
@@ -75,7 +76,9 @@
 
 
 <script>
-import {mapGetters,mapActions} from 'vuex'
+
+
+import axios from "axios";
 
 export default {
   name: "EventCard",
@@ -83,11 +86,32 @@ export default {
     return{
 
       show: false,
-      pageShown:0,
+      pageLength:10,
       totalEvents : [],
       numPerPage:5,
       currentPage:1,
-      newList:[]
+      newList:[],
+      pageNum:0,
+
+      selected:[{
+        "name":"5",
+        "value":5
+      }],
+
+      items:[
+        {
+          "name":"5",
+          "value":5
+        },
+
+        {"name":"10",
+          "value":10
+        },
+        {"name":"20",
+          "value":20
+        }
+      ],
+
 
 
 
@@ -99,31 +123,61 @@ export default {
   },
 
   beforeMount() {
-
+    //this.getPageNum();
+   // this.newArray()
   },
 
   mounted() {
-    this.selectEvent()
+   // this.getPageNum();
   },
 
   computed:{
-    ...mapGetters(["allEvents","displayEvents"]),
+
   },
    // getPageNum(){
    //    return this.pageNumber = Math.ceil(this.events.length / this.pageSize)
    // }
 
   methods:{
-    ...mapActions(["getEvents","selectEvent"]),
+     async getEvents(){
+      try{
+        const response = await axios.get('/events')
+        console.log("hello mother fucker")
+        this.totalEvents = response.data
+        this.pageLength = Math.ceil(response.data.length / this.numPerPage)
 
-    getPageNum(){
-      console.log(this.allEvents)
-      return this.pageShown = 5  //Math.ceil(this.allEvents.length / 5)
+       // console.log( this.totalEvents)
+       // console.log( this.pageLength)
+
+
+      }catch(err){
+        console.log(err)
+      }
+    },
+
+    changePagi(){
+      this.numPerPage = this.selected
+      console.log( this.numPerPage)
+      console.log( "=========================")
+      this.pageLength = Math.ceil(this.totalEvents.length / this.numPerPage)
+     console.log( "=========================")
+      console.log( this.pageLength)
+    },
+
+    async getPageNum(){
+      try{
+        console.log((this.totalEvents).length)
+         if(this.totalEvents.length !== 0){
+          return this.pageNum = Math.ceil(this.totalEvents.length / this.numPerPage)
+        }
+      }catch(e){
+        console.log(e)
+      }
     },
 
     newArray(){
       for(let i = 0; i < this.numPerPage; i ++){
-        this.newList.push(this.allEvents[i])
+        this.newList.push(this.totalEvents[i])
       }
       console.log(this.newList)
       return this.newList

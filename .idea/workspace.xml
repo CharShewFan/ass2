@@ -19,15 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="611b9b06-2fa5-48eb-a15a-26808a6fd809" name="Default Changelist" comment="improve and fixed some bugs on login and homepage routes">
-      <change afterPath="$PROJECT_DIR$/ass2/src/store/modules/events.js" afterDir="false" />
+    <list default="true" id="611b9b06-2fa5-48eb-a15a-26808a6fd809" name="Default Changelist" comment="add footer component and add state management of Event loading">
+      <change afterPath="$PROJECT_DIR$/ass2/src/components/SelectDisNum.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/App.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/App.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/components/EventCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/EventCard.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/components/Footer.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/Footer.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/components/NavBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/NavBar.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/store/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ass2/src/views/Event.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/views/Event.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/store/modules/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/store/modules/events.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +33,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Vue Single File Component" />
         <option value="JavaScript File" />
+        <option value="Vue Single File Component" />
       </list>
     </option>
   </component>
@@ -82,7 +78,8 @@
       <updated>1617845015432</updated>
       <workItem from="1617845016500" duration="15593000" />
       <workItem from="1617922172603" duration="19574000" />
-      <workItem from="1618012582127" duration="11305000" />
+      <workItem from="1618012582127" duration="14075000" />
+      <workItem from="1618095735465" duration="8695000" />
     </task>
     <task id="LOCAL-00001" summary="finished search component and eventCard component,modify home page ,change route to more precised path">
       <created>1617898773035</created>
@@ -112,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1617985144477</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="add footer component and add state management of Event loading">
+      <created>1618055321968</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1618055321968</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -135,33 +139,23 @@
     <MESSAGE value="add log out component and improve the login status management" />
     <MESSAGE value="add Vuex and make login/ logOut toggle by itself with state management" />
     <MESSAGE value="improve and fixed some bugs on login and homepage routes" />
-    <option name="LAST_COMMIT_MESSAGE" value="improve and fixed some bugs on login and homepage routes" />
+    <MESSAGE value="add footer component and add state management of Event loading" />
+    <option name="LAST_COMMIT_MESSAGE" value="add footer component and add state management of Event loading" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1143" y="411" key="#ESLint" timestamp="1617877429564">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="1143" y="411" key="#ESLint/0.0.1920.1080@0.0.1920.1080" timestamp="1617877429564" />
-    <state x="359" y="88" key="SettingsEditor" timestamp="1617882592286">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="239" y="0" width="1201" height="900" key="SettingsEditor" timestamp="1618102569108">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="359" y="88" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1617882592286" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1617985153419">
+    <state x="239" y="0" width="1201" height="900" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1618102569108" />
+    <state x="359" y="88" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1618095750038" />
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1618055328200">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="235" y="-851" key="Vcs.Push.Dialog.v2/-225.-1055.1920.1055/0.25.1440.781@-225.-1055.1920.1055" timestamp="1617898779461" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1617985153419" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/ass2/src/components/EventCard.vue</url>
-          <line>3</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1618055328200" />
   </component>
 </project>

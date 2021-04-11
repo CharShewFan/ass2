@@ -2,14 +2,16 @@
 import axios from "axios";
 
 const state = {
-    events:null,
+    events:[],
     eventForDisplay:[],
+    count:0
 
 
 }
 const getters = {
     allEvents:(state)=>state.events,
-    displayEvents:(state)=>state.eventForDisplay
+    displayEvents:(state)=>state.eventForDisplay,
+    count:(state)=>state.events.length
 } //retrieve value/new state from state
 
 
@@ -35,6 +37,10 @@ const actions = {
             array.push(this.$store.getters.allEvents[i])
         }
         commit("setDisplayEvents",array)
+    },
+
+    updateCount({commit}){
+        //commit(state,&store.getters.count)
     }
 
 } //send mutation change commit to mutation
