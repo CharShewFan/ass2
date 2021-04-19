@@ -8,7 +8,7 @@
       <v-select
           item-text="name"
           label="chose display number per page"
-          item-value="value"
+          :item-value="value"
           :items = "this.items"
           v-model="this.selected"
 

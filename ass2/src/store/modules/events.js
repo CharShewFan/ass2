@@ -40,8 +40,10 @@ const actions = {
     },
 
     updateCount({commit}){
-        //commit(state,&store.getters.count)
-    }
+        commit(state)
+    },
+    //e is event parameter
+
 
 } //send mutation change commit to mutation
 

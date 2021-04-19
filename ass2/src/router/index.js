@@ -6,6 +6,8 @@ import Registration from '../views/Registration'
 import Edit from '../components/EditUser'
 import Login from '../components/Login'
 import Event from '../views/Event'
+import ManageEvent from "../views/ManageEvents"
+import AddEvent from "../components/AddEvent"
 
 import axios from 'axios'
 axios.defaults.baseURL = "http://localhost:4941/api/v1"
@@ -41,17 +43,43 @@ const routes = [
     path:'/editUser',
     name:'Edit',
     component:Edit,
+    meta: { requiresAuth: true },
     beforeEnter:(to,from,next)=>{
       let isAuthenticated = checkAuth()
-      if(!isAuthenticated) next({name:Login})
-      else next()
+      if(to.name !== "Login" && isAuthenticated !== true) next({name:"Login"})
+    else{
+      next();
     }
   },
+  },
+  {
+    path:'/manageEvent',
+    name:"ManageEvent",
+    component:ManageEvent,
+    beforeEnter:(to,from,next)=>{
+      let isAuthenticated = checkAuth()
+      if(to.name !== "Login" && isAuthenticated !== true) next({name:"Login"})
+    else{
+      next();
+    }
+  },
+  },
+
   {
     path:'/login',
     name:'Login',
-    component: Login
+    component: Login,
+  },
+
+  {
+    path:'/addEvent',
+    name:'AddEvent',
+    component:AddEvent
   }
+
+
+
+
 ]
 
 const router = new VueRouter({

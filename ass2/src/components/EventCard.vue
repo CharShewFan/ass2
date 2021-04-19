@@ -1,5 +1,6 @@
 <template>
 <div>
+
 <v-container class="my-5">
 
   <v-row>
@@ -82,6 +83,9 @@ import axios from "axios";
 
 export default {
   name: "EventCard",
+  components:{
+    
+  },
   data(){
     return{
 
@@ -137,7 +141,6 @@ export default {
    // getPageNum(){
    //    return this.pageNumber = Math.ceil(this.events.length / this.pageSize)
    // }
-
   methods:{
      async getEvents(){
       try{

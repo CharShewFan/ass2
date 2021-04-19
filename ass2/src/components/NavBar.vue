@@ -30,7 +30,7 @@
     ></v-avatar>
    </v-btn>
 
-   <v-app-bar-nav-icon class="hidden-md-and-up" @click="toggle()"></v-app-bar-nav-icon>
+   <v-app-bar-nav-icon  @click="toggle()"></v-app-bar-nav-icon>
  </v-toolbar>
 
 

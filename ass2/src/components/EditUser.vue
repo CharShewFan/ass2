@@ -60,6 +60,18 @@ name: "EditUser",
   },
   methods:{
   submit(){
+    if(this.nPassword !== "" && this.oPassword !== ""){
+      axios.post('/user/:id',{
+        "firstname":this.nfirstName,
+        "lastname":this.nLastName,
+        "password":this.nPassword
+    })
+    if(filename !== ""){
+      axio.post("/user/:id/image"{
+        "imagefilename":this.filename
+      })
+    }
+    }
     axios.post('/user/:id',{
     })
   },
