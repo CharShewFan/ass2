@@ -3,12 +3,12 @@
 import axios from "axios";
 
 const state = {
-    loginStatus:false,
+    logOutStatus:false,
 
 }
 
 const getters = {
-    isLogIn:(state) => state.loginStatus,
+    isLogOut:(state) => state.logOutStatus,
 
 
 } //retrieve value from state
@@ -18,10 +18,9 @@ const getters = {
 const actions = {
 
     async logOut({commit}){
-        let token = sessionStorage.getItem('token')
-        axios.defaults.headers = {"X-Authorization": token}
+
         await axios.post('/users/logout')
-        sessionStorage.clear()
+        localStorage.clear()
         console.log("log out now!")
 
         let Status = false
@@ -35,7 +34,7 @@ const mutations = {
     //setStatus: (state, Status) => (state.loginStatus = Status),
 
     setStatus(state,status){
-        return state.loginStatus = status
+        return state.logOutStatus = status
     },
 
 

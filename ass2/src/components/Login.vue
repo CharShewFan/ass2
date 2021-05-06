@@ -26,7 +26,7 @@
 
 <script>
 //import axios from 'axios'
-import {mapGetters} from 'vuex'
+import {mapGetters,mapActions} from 'vuex'
 import axios from "axios";
 
 export default {
@@ -45,6 +45,8 @@ export default {
   computed: mapGetters(["isLogIn"]),
 
   methods:{
+   ...mapActions(["logIn"]),
+
     async Login(){
 
           console.log(this.email)

@@ -1,5 +1,6 @@
 <template>
     <v-container class="mt-8">
+
         <EventFinder />
         <v-chip link color="yellow" pill class="mr-5">
             <router-link to="/manageEvent">My Events</router-link>

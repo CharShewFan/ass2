@@ -11,7 +11,7 @@ const getters = {
 const actions = {
     async logIn({commit},email,password){
         try{
-            const response = await axios.post("/user/login",{
+            const response = await axios.post("/users/login",{
                 "email":email,
                 "password":password
             })

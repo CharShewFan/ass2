@@ -97,7 +97,7 @@
         navList:[
             {"title":"Home","link":"/"},
             {"title":"Events","link":"/event"},
-            {"title":"User","link":"/registration"},
+            {"title":"User","link":"/editUser"},
             {"title":"Edit","link":"/editUser"},
 
           ],

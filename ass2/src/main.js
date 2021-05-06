@@ -9,15 +9,15 @@ import axios from 'axios'
 Vue.config.productionTip = false
 axios.defaults.baseURL = 'http://localhost:4941/api/v1';
 
-router.beforeEach((to,from,next)=>{
-  if(to.meta.loginRequire === true){
-    if(store.state.loginStatus !== true){
-      next({path:"/login",name:"Login"})
-    }else{
-      next();
-    }
-  }
-})
+// router.beforeEach((to,from,next)=>{
+//   if(to.meta.loginRequire === true){
+//     if(store.state.loginStatus !== true){
+//       next({path:"/login",name:"Login"})
+//     }else{
+//       next();
+//     }
+//   }
+// })
 
 
 new Vue({
