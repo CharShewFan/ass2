@@ -59,6 +59,7 @@ name: "EditUser",
 
   },
   methods:{
+
   submit(){
     if(this.nPassword !== "" && this.oPassword !== ""){
       axios.post('/user/:id',{
@@ -66,8 +67,8 @@ name: "EditUser",
         "lastname":this.nLastName,
         "password":this.nPassword
     })
-    if(filename !== ""){
-      axio.post("/user/:id/image"{
+    if(this.filename !== ""){
+      axios.post("/user/:id/image",{
         "imagefilename":this.filename
       })
     }

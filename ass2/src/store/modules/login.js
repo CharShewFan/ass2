@@ -1,45 +1,47 @@
-//import axios from 'axios'
-
-import axios from "axios";
+import axios from 'axios'
 
 const state = {
-    loginStatus:false,
-    type:"",
-    error:false
-
+    loginStatus : false
 }
+
 const getters = {
-    isLogIn:(state) => state.loginStatus,
-    theType:(state)=> state.type,
-
-} //retrieve value from state
-
-
+    isLogIn:(state)=>state.loginStatus,
+}
 
 const actions = {
+    async logIn({commit},email,password){
+        try{
+            const response = await axios.post("/user/login",{
+                "email":email,
+                "password":password
+            })
 
-    async logOut({commit}){
-        let token = sessionStorage.getItem('token')
-        axios.defaults.headers = {"X-Authorization": token}
-        await axios.post('/users/logout')
-        sessionStorage.clear()
-        console.log("log out now!")
+            console.log(response.data)
+            if(response.status === 200){
+                localStorage.setItem("userId",response.data.id)
+                localStorage.setItem("token",response.data.token)
+                let Status = true
+                commit("setStatus",Status)
+            }else{
+                let Status = false;
+                commit("setStatus",Status);
+            }
 
-        let Status = false
-        commit("setStatus",Status)
-    },
-} //send mutation change commit to mutation
+        }catch (e) {
+            console.log(e)
+            let Status = false
+            commit("setStatus",Status)
+        }
+
+    }
+}
 
 const mutations = {
-    //setStatus: (state, Status) => (state.loginStatus = Status),
-
-    setStatus(state,status){
-        return state.loginStatus = status
-    },
-
-    setType:(state,type)=>(state.type = type)
+    setStatus(state, status) {
+        return state.loginStatus = status;
+    }
 }
- //change the state
+
 
 export default {
     state,
@@ -47,4 +49,3 @@ export default {
     actions,
     mutations
 };
-

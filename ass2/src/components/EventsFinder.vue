@@ -10,7 +10,6 @@
         <v-form class="mx-auto">
           <v-container >
             <v-row>
-
               <v-col
                   cols = "12"
                   sm = "12"
@@ -69,10 +68,6 @@
             </div>
 
           </v-container>
-
-
-
-
         </v-form>
       </v-expansion-panel-content>
     </v-expansion-panel>
@@ -106,7 +101,7 @@
 
       methods:{
         search(){
-          axios.post(   
+          axios.get(   
             "/event",{
               "q":this.query,
               "categoryid":this.cid_1,
@@ -114,6 +109,10 @@
               "startIndex":this.startIndex,
               "count":this.count,
               "sortBy":this.sortBy
+          }).then((response) =>{
+            console.log(response)
+          }).catch((e)=>{
+            console.log(e)
           })
          
           

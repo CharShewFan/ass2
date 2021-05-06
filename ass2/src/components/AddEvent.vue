@@ -1,6 +1,6 @@
 <template>
 <div>
-    <v-form v-model="valid">
+    <v-form >
         <v-container>
             <h3  class="my-16">Input the form below</h3>
             <v-row>
@@ -72,11 +72,11 @@
                 </v-col>
 
                 <v-col sm="12" md="6" lg="4" xl="3">
-
+                   <v-btn @click="add()" color="primary" float="right">Add Event</v-btn>
                 </v-col>
 
                 <v-col sm="12" md="6" lg="4" xl="3">
-
+                    <v-date-picker v-model="picker"></v-date-picker>
                 </v-col>
 
                 <v-col sm="12" md="6" lg="4" xl="3">
@@ -93,26 +93,64 @@
 </template>
 
 <script>
-    //import axios from 'axiso'
+
+    import axios from 'axios'
     export default{
 
         name:"addEvent",
-        data(){
-            return{
+        data:()=>({
+            
                 title:"",
                 description:"",
                 url:"",
                 capacity:"",
                 fee:"",
+                venue:"",
                 items:["aniaml","human right" ,"earthquake","forest"],
-                catogories:[]
-            };
+                catogories:[],
+                //picker:""
+                picker: new Date().toISOString().substr(0, 10),
+           
+        }),
+
+        beforeMount(){
+            this.getCate()
         },
 
         methods:{
-        //    add(){
-        //        const response = axios.post("/event",{id:"1"})
-        //    }
-        }
+            getCate(){
+                axios.get("/events/categories").then((response)=>{
+                    console.log(response.data)
+                    this.catogories.push(response)
+                }).catch((e)=>{
+                    console.log(e)
+                }    
+                )
+            },
+
+            add(){
+
+            if (this.title !== "" && this.description !== "" && this.picker !== ""){
+                axios.post(   
+                    "/event",{
+                    "q":this.query,
+                    "categoryid":this.cid_1,
+                    "categoryid2":this.cid_2,
+                    "startIndex":this.startIndex,
+                    "count":this.count,
+                    "sortBy":this.sortBy
+                }).then((response) =>{
+                    console.log(response)
+                }).catch((e)=>{
+                    console.log(e)
+                })
+            }else{
+                alert("please fill in the require files")
+            }
+
+
+        },
     }
+}
+
 </script>

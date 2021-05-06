@@ -90,7 +90,8 @@
         lastname:"",
         email: '',
         password:"",
-        userInfo:[]
+        userInfo:[],
+        info:""
         
       }),
   
@@ -123,16 +124,22 @@
       },
   
       methods: {
-        submit () {
-          this.$v.$touch()
-          axios.post('/users',{
-              "firstname":this.firstname,
-              "lastname":this.lastname,
+        async submit () {
+          await axios.post('http://localhost:4941/api/v1/users/register',{
+              "firstName":this.firstname,
+              "lastName":this.lastname,
+              "email":this.email,
               "password":this.password
           }).then(response=>{
-              this.userId = response.body.id
-              
-          })
+            console.log(response.data)
+            alert(response.data)
+            
+            
+          }).catch(
+            response => {
+              alert (response.status)
+            }
+          )
         },
         clear () {
           this.$v.$reset()
