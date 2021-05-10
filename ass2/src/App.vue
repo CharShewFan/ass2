@@ -3,12 +3,10 @@
 
     <NavBar/>
 
-    <v-main>
-
+    <v-main class="main">
     <router-view></router-view>
-
     </v-main>
-    <Footer></Footer>
+    <Footer />
 
   </v-app>
 </template>
@@ -17,11 +15,12 @@
 //import HelloWorld from './components/HelloWorld';
 import NavBar from './components/NavBar';
 import Footer from '@/components/Footer'
+import {mapGetters,mapActions} from 'vuex';
 
 
 export default {
   name: 'App',
-
+  computed:mapGetters(["isLogIn"]),
   components: {
    NavBar,
     Footer
@@ -31,5 +30,24 @@ export default {
     return {
     }
   },
+
+  mounted() {
+    this.checkLoginStatus()
+  },
+
+  methods:{
+    checkLoginStatus(){
+      if(localStorage.getItem("token") && localStorage.getItem("userId")){
+        this.refreshPage()
+      }
+    },
+
+    ...mapActions(["refreshPage"])
+  }
 };
 </script>
+
+
+<style scoped>
+
+</style>

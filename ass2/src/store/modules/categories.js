@@ -2,12 +2,21 @@
 import axios from "axios";
 
 const state = {
-    categories:[]
+    categories:[],
+    cateItem:[]
 }
+
+
 const getters = {
-    // allEvents:(state)=>state.events,
-    // displayEvents:(state)=>state.eventForDisplay,
-    // count:(state)=>state.events.length
+   getUpdate:(state)=>{
+      return  state.categories
+   },
+
+    getCateItem:(state)=>{
+       return state.cateItem
+    }
+
+
 } //retrieve value/new state from state
 
 
@@ -16,8 +25,18 @@ const actions = {
 
     async getCategories({commit}){
         try{
+            let sorted = []
             const response = await axios.get("/events/categories")
-            commit("addCate",response.data)
+            console.log(response.data)
+           for(let i = 0; i <= 24 ;i++ ){
+               for (let j = 0; j <= 23; j++){
+                   if(response.data[j].id  === i) {
+                       sorted.push(response.data[j])
+                   }
+               }
+            }
+            console.log(sorted)
+            commit("addCate",sorted)
         }catch (e) {
             console.log(e)
         }
@@ -36,8 +55,10 @@ const mutations = {
     },
 
     addCate(state,categories){
-        return state.categories = categories;
-    }
+        return state.categories = categories
+    },
+
+    // sortCate()
 
 }
 //change the state

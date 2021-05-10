@@ -46,11 +46,24 @@
       type = "password"
     ></v-text-field>
 
-  
-      <v-btn class="mr-4 primary" @click="submit">submit</v-btn>
-      <v-btn class="warning" @click="clear">clear</v-btn>
-      <v-btn class="info" to="/login">sign in</v-btn>
-      <v-btn type="button" @click="$router.go(-1)">back</v-btn>
+
+      <v-row class="ml-10">
+        <v-col>
+          <v-btn class="mr-4 primary" @click="submit">submit</v-btn>
+        </v-col>
+
+        <v-col>
+          <v-btn class="warning" @click="clear">clear</v-btn>
+        </v-col>
+
+      </v-row>
+      <v-row class="ml-10">
+        <v-col>    <v-btn class="info" to="/login">sign in</v-btn></v-col>
+
+
+      <v-col>      <v-btn type="button" @click="$router.go(-1)">back</v-btn>
+      </v-col>
+      </v-row>
       <!--返回上一页-->
     </v-form>
 
@@ -96,8 +109,6 @@
       }),
   
       computed: {
-
-
         firstnameErrors () {
           const errors = []
           if (!this.$v.firstname.$dirty) return errors
@@ -124,17 +135,16 @@
       },
   
       methods: {
-        async submit () {
-          await axios.post('http://localhost:4941/api/v1/users/register',{
+         submit () {
+           axios.post('/users/register',{
               "firstName":this.firstname,
               "lastName":this.lastname,
               "email":this.email,
               "password":this.password
           }).then(response=>{
             console.log(response.data)
-            alert(response.data)
-            
-            
+            alert("Sign Up success")
+             //this.$route.push({path:'/userInfo'})
           }).catch(
             response => {
               alert (response.status)

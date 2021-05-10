@@ -1,7 +1,6 @@
 <template>
     <div>
      <v-container>
-       <router-view></router-view>
        <UserInfo></UserInfo>
      </v-container>
     </div>

@@ -22,11 +22,11 @@
       <v-text-field label="old password" v-model = "oPassword" type="password" clearable solo></v-text-field>
     </v-col>
 
-    <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
-      <p class="text-caption">Upload Profile Image</p>
-      <v-file-input show-size truncate-length = "43" prepend-icon="mdi-camera" v-model="filename">
-      </v-file-input>
-    </v-col>
+<!--    <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">-->
+<!--      <p class="text-caption">Upload Profile Image</p>-->
+<!--      <v-file-input show-size  prepend-icon="mdi-camera" v-model="filename" value="">-->
+<!--      </v-file-input>-->
+<!--    </v-col>-->
 
     <v-col cols="12" sm = "12" md = "6" lg = "6" xl="6">
       <v-btn @click = "clear()" class="warning right ">Clear</v-btn>
@@ -61,23 +61,31 @@ name: "EditUser",
   methods:{
 
   submit(){
+    let userId = localStorage.getItem("userId")
+    axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
     if(this.nPassword !== "" && this.oPassword !== ""){
-      axios.post('/user/:id',{
-        "firstname":this.nfirstName,
-        "lastname":this.nLastName,
-        "password":this.nPassword
-    })
-    if(this.filename !== ""){
-      axios.post("/user/:id/image",{
-        "imagefilename":this.filename
-      })
-    }
-    }
-    axios.post('/user/:id',{
-    })
+      axios.patch(`/users/${userId}`,{
+        "firstName":this.nfirstName,
+        "lastName":this.nLastName,
+        "password":this.nPassword,
+        "currentPassword":this.oPassword
+    })}
+
+    // if(this.filename !== ""){
+    //   axios.post("/user/:id/image",{
+    //     "imagefilename":this.filename
+    //   })
+    // }
+    // }
+    // axios.post('/user/:id',{
+    // })
   },
+
+
+
+
     clear(){
-    return null
+    this.nfirstName = ""
     }
   }
 }

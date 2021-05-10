@@ -2,11 +2,11 @@
     <v-container class="mt-8">
 
         <EventFinder />
-        <v-chip link color="yellow" pill class="mr-5">
+        <v-chip link  pill class="mr-5 pill error" >
             <router-link to="/manageEvent">My Events</router-link>
         </v-chip>
 
-        <v-chip class="mr-5" >
+        <v-chip class="mr-5 orange" >
             <router-link to="/addEvent">Creat Event</router-link>
         </v-chip>
 
@@ -47,5 +47,12 @@
 </script>
 
 <style scoped>
+a {
+  text-decoration: none;
+  color: black;
+}
 
+.pill{
+  background-color: #90caf9;
+}
 </style>

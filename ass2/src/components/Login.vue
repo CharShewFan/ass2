@@ -1,8 +1,10 @@
 <template>
 <div>
   <v-alert elevation="10"
-           :type="`${type}`"
-           v-show="error">
+           v-show="error"
+           :type="this.type"
+           :color="this.color"
+  >
     {{errorMessages}}
   </v-alert>
   <v-card flat>
@@ -14,19 +16,27 @@
     <v-text-field label="Password" type="password" clearable solo v-model="password"></v-text-field>
 
     <div class="right mr-5">
-      <v-btn type="button" class="warning">Reset</v-btn>
-      <v-btn type="button" class="primary" @click="Login" >Submit</v-btn>
-      <v-btn type="button" @click="$router.go(-1)">back</v-btn>
+
+      <div>
+        <v-btn type="button" class="primary mr-5 " @click="Login" >Submit</v-btn>
+        <v-btn type="button" class="warning mr-5" >Reset</v-btn>
+      </div>
+
+      <div class="mx-2 my-5">
+        <v-btn type="button" @click="$router.go(-1)" class="mr-5 info" >back</v-btn>
+      </div>
+      <div>
+        <v-btn type="button" to="/registration" class="success">sign up</v-btn>
+      </div>
     </div>
-
-
   </v-form>
+
 </div>
 </template>
 
 <script>
 //import axios from 'axios'
-import {mapGetters,mapActions} from 'vuex'
+import {mapActions} from 'vuex'
 import axios from "axios";
 
 export default {
@@ -37,15 +47,16 @@ export default {
      password:"",
      error:false,
      errorMessages:"",
-     type:""
+     type:"",
+     color:""
 
    }
   },
 
-  computed: mapGetters(["isLogIn"]),
+
 
   methods:{
-   ...mapActions(["logIn"]),
+   ...mapActions(["logIn","getUerInfo"]),
 
     async Login(){
 
@@ -59,23 +70,33 @@ export default {
             console.log(response.status)
 
             let token = response.data.token
-            let userId = response.data.userId
-            sessionStorage.setItem("token",token);
-            sessionStorage.setItem("userId",userId)
+            let userID = response.data.userId
+            localStorage.setItem("token",token);
+            localStorage.setItem("userId",userID)
+            axios.defaults.headers.common["X-Authentication"] = token
             this.error = true
             this.type = "success"
+            this.color = "green"
             this.errorMessages = "login in successfully"
-            this.$store.commit('setStatus',true); //same as do it in action{}, setStatus is the function in mutation
+
+            if(response.status === 200){
+              this.logIn()
+              let redirect = decodeURIComponent(this.$route.query.redirect || '/')
+              await this.$router.push({path:redirect})
+              //await this.getUerInfo(userID)
+            }else{
+              this.error = true;
+              this.errorMessages = "please input valid email or correct password"
+              this.type = "warning"
+              this.color = "red"
+            }
+
+
 
           }catch(err)
           {
             console.log("miss me?")
             console.log(err)
-            this.error = true;
-            this.errorMessages = "please input valid email or correct password"
-            this.type = "warning"
-
-
           }
     }
 

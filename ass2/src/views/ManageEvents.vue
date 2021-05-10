@@ -1,14 +1,16 @@
 <template>
-<div class="contianer">
-    <v-bar>
-        <v-chip>
+<div class="container">
+    <v-banner   elevation="12"
+                class="mt-3"
+                sticky>
+        <v-chip link pill class="orange mr-10">
             <router-link to="/">Event I Hosted</router-link>
         </v-chip>
 
-        <v-chip>
+        <v-chip link pill class="error">
             <router-link to="/">Event I Join</router-link>
         </v-chip>
-    </v-bar>
+    </v-banner>
 
     <div class="contentBox">
         <router-view />

@@ -66,7 +66,7 @@
     </v-container>
   </div>
 
- <h1 class="mx-auto" >{{this.currentPage}}</h1>
+
 </v-container>
 
 
@@ -80,6 +80,7 @@
 
 
 import axios from "axios";
+import {mapActions,mapGetters} from "vuex"
 
 export default {
   name: "EventCard",
@@ -115,15 +116,13 @@ export default {
           "value":20
         }
       ],
-
-
-
-
+      cateList:[]
     }
   },
 
   created() {
-    this.getEvents()
+    // this.getEvents();
+    // this.getCategories()
   },
 
   beforeMount() {
@@ -132,27 +131,27 @@ export default {
   },
 
   mounted() {
-   // this.getPageNum();
+    this.getEvents();
+    this.getCategories()
   },
 
   computed:{
-
+    match:(index)=>{
+      return this.cateList[index]
+    },
+    ...mapGetters(['getUpdate'])
   },
-   // getPageNum(){
-   //    return this.pageNumber = Math.ceil(this.events.length / this.pageSize)
-   // }
+
   methods:{
+    ...mapActions(["getCategories"]),
+
+
      async getEvents(){
       try{
         const response = await axios.get('/events')
         console.log("hello mother fucker")
         this.totalEvents = response.data
         this.pageLength = Math.ceil(response.data.length / this.numPerPage)
-
-       // console.log( this.totalEvents)
-       // console.log( this.pageLength)
-
-
       }catch(err){
         console.log(err)
       }

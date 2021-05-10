@@ -7,10 +7,10 @@ import Login from '../components/Login'
 import Event from '../views/Event'
 import ManageEvent from "../views/ManageEvents"
 import AddEvent from "../components/AddEvent"
-
+import UserInfo from "@/components/UserInfo";
 import axios from 'axios'
 axios.defaults.baseURL = "http://localhost:4941/api/v1"
-//axios.defaults.withCredentials = true;
+
 
 Vue.use(VueRouter)
 
@@ -66,6 +66,13 @@ const routes = [
     name:'AddEvent',
     component:AddEvent,
     meta:{loginRequire: true}
+  },
+
+  {
+    path:'/userInfo',
+    name:"userInfo",
+    component: UserInfo,
+    meta:{loginRequire: true}
   }
 ]
 
@@ -74,30 +81,6 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to,from,next)={
-//   if(to.name !== 'login' && !isAuthenticated) next
-// })
 
-// function checkAuth(){
-//   let isAuthenticated = false
-//   let id = parseInt(sessionStorage.getItem("userId"))
-//   let token = sessionStorage.getItem("token")
-//   if(id !== undefined && token !== undefined){
-//     const options = {
-//       method: 'POST',
-//       headers: { 'X-Authorization': token },
-//       url:`/users/${id}`,
-//     };
-//     axios(options).then((response)=>{
-//       if(response.data.email !== undefined){
-//         isAuthenticated = true
-//       }
-//     }).catch(err=>{
-//       console.log(err)
-//     })
-//   }
-//   console.log(isAuthenticated)
-//   return isAuthenticated
-// }
 
 export default router

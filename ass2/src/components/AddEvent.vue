@@ -58,7 +58,7 @@
                     deletable-chips
                     filled
                     multiple
-                    rounded
+
                     small-chips
                     solo
                     v-model="catogories"

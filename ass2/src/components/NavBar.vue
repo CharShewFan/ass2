@@ -3,13 +3,13 @@
  <v-toolbar  dark >
   
    <v-toolbar-title class="text-uppercase grey--" >
-     <span class="font-weight-light">Mock</span> 
+     <span class="font-weight-light" >Mock</span>
      <span class="light-blue--text" >EventFinda </span></v-toolbar-title>
+
      <v-divider 
       class="mx-4"
       vertical
-
-      >
+     >
     </v-divider>
     <v-btn   class = "hidden-sm-and-down mr-3 flat dark" to="/" >Home</v-btn>
     
@@ -23,16 +23,16 @@
      <v-icon>mdi-magnify</v-icon>
    </v-btn>
 
-   <v-btn icon to = "/registration"> 
+   <v-btn icon to = "/userInfo">
     <v-avatar 
       size = "32"
       color = "grey"
-    ></v-avatar>
+    >
+    </v-avatar>
    </v-btn>
 
    <v-app-bar-nav-icon  @click="toggle()"></v-app-bar-nav-icon>
  </v-toolbar>
-
 
 
   <v-navigation-drawer app absolute temporary class=" dark lighten-4 --text" transition="slide-x-transition"  v-model="drawer">
@@ -71,7 +71,7 @@
     <v-list dense nav v-show="isLogIn">
       <v-list-item-group>
         <v-list-item @click="logOut" to="/">
-          <v-list-item-title>Log out</v-list-item-title>
+          <v-list-item-title @click="logout">Log out</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -85,7 +85,7 @@
 </template>
   
   <script>
-  //import axios from 'axios'
+  import axios from 'axios'
   import {mapGetters,mapActions} from 'vuex';
 
     export default {
@@ -99,14 +99,23 @@
             {"title":"Events","link":"/event"},
             {"title":"User","link":"/editUser"},
             {"title":"Edit","link":"/editUser"},
-
           ],
-
       }),
       computed:mapGetters(["isLogIn"]),
-
       methods:{
         ...mapActions(["logOut"]),
+
+        async logout(){
+          try{
+            console.log("nav bar log out call")
+            let response = await axios.post("/users/logout")
+            console.log(response)
+              localStorage.clear()
+              this.logOut()
+          }catch (e) {
+            console.log(e)
+          }
+        },
 
         toggle(){
           this.drawer = !this.drawer

@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import LogOut from "./modules/logOut"
 import Events from './modules/events'
 import LogIn from './modules/login'
+import User from './modules/user'
+import Cate from './modules/categories'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
-    LogOut,
     Events,
-    LogIn
+    LogIn,
+    User,
+    Cate
   }
 })
