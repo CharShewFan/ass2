@@ -22,7 +22,8 @@ const getters = {
 }
 
 const actions = {
-    async getUerInfo({commit},id){
+    async getUserInfo({commit},id){
+        axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
         const response = await axios.get(`/users/${id}`)
         if(response.status === 200){
             commit("setName",response.data.firstName +" " + response.data.lastName)

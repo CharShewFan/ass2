@@ -79,6 +79,7 @@
     import { validationMixin } from 'vuelidate'
     import { required, maxLength, email } from 'vuelidate/lib/validators'
     import axios from 'axios'
+    import {mapActions} from 'vuex'
     //import Login from '@/components/Login';
 
     export default {
@@ -135,7 +136,11 @@
       },
   
       methods: {
+          ...mapActions(['logIn','getUserInfo']),
+
          submit () {
+           localStorage.setItem("email",this.email)
+           localStorage.setItem("password",this.password)
            axios.post('/users/register',{
               "firstName":this.firstname,
               "lastName":this.lastname,
@@ -145,9 +150,33 @@
             console.log(response.data)
             alert("Sign Up success")
              //this.$route.push({path:'/userInfo'})
-          }).catch(
-            response => {
-              alert (response.status)
+          }).then(()=>{
+              axios.post('/users/login',{
+                "email":localStorage.getItem("email"),
+                "password":localStorage.getItem("password")
+              }
+          ).then((response)=>{
+                if(response.status === 200){
+                  localStorage.clear()
+                  localStorage.setItem("userId",response.data.userId)
+                  localStorage.setItem("token",response.data.token)
+                  this.logIn()
+                  this.getUserInfo(localStorage.getItem("userId"))
+                  //after login jump to home page
+                  let redirect = decodeURIComponent(this.$route.query.redirect || '/')
+                  this.$router.push({path:redirect})
+                }else{
+                  alert(response.status.toString())
+                }
+              }).catch(error=>{
+                console.log(error)
+                alert("Login failed")
+              })
+          }
+           )
+               .catch(
+            error => {
+              alert (error)
             }
           )
         },

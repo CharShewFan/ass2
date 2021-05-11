@@ -19,10 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="611b9b06-2fa5-48eb-a15a-26808a6fd809" name="Default Changelist" comment="add footer component and add state management of Event loading">
-      <change afterPath="$PROJECT_DIR$/ass2/src/components/SelectDisNum.vue" afterDir="false" />
+    <list default="true" id="611b9b06-2fa5-48eb-a15a-26808a6fd809" name="Default Changelist" comment="modify the pagination component">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/components/EventCard.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/EventCard.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ass2/src/components/SelectDisNum.vue" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/components/SelectDisNum.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ass2/src/store/modules/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/ass2/src/store/modules/events.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,7 +79,9 @@
       <workItem from="1617845016500" duration="15593000" />
       <workItem from="1617922172603" duration="19574000" />
       <workItem from="1618012582127" duration="14075000" />
-      <workItem from="1618095735465" duration="8695000" />
+      <workItem from="1618095735465" duration="9040000" />
+      <workItem from="1618112739416" duration="428000" />
+      <workItem from="1618148556150" duration="38000" />
     </task>
     <task id="LOCAL-00001" summary="finished search component and eventCard component,modify home page ,change route to more precised path">
       <created>1617898773035</created>
@@ -116,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1618055321968</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="modify the pagination component">
+      <created>1618111598113</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1618111598113</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,7 +149,8 @@
     <MESSAGE value="add Vuex and make login/ logOut toggle by itself with state management" />
     <MESSAGE value="improve and fixed some bugs on login and homepage routes" />
     <MESSAGE value="add footer component and add state management of Event loading" />
-    <option name="LAST_COMMIT_MESSAGE" value="add footer component and add state management of Event loading" />
+    <MESSAGE value="modify the pagination component" />
+    <option name="LAST_COMMIT_MESSAGE" value="modify the pagination component" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1143" y="411" key="#ESLint" timestamp="1617877429564">
@@ -152,10 +162,10 @@
     </state>
     <state x="239" y="0" width="1201" height="900" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1618102569108" />
     <state x="359" y="88" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1618095750038" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1618055328200">
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1618111601294">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="235" y="-851" key="Vcs.Push.Dialog.v2/-225.-1055.1920.1055/0.25.1440.781@-225.-1055.1920.1055" timestamp="1617898779461" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1618055328200" />
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1920.1080@0.0.1920.1080" timestamp="1618111601294" />
   </component>
 </project>

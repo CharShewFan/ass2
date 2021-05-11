@@ -53,6 +53,14 @@
               >
                 <v-text-field label="startIndex" v-model="startIndex" clearable solo></v-text-field>
               </v-col >
+              <v-col
+                  cols = "12"
+                  sm = "12"
+                  md = "4"
+                  lg = "3"
+              >
+                <v-text-field label="Organizer ID" v-model="organizerId" clearable solo></v-text-field>
+              </v-col >
 
               <v-col
                   cols = "12"
@@ -92,18 +100,19 @@
   <script>
 
   import store from '../store'
-    //import axios from "axios"
+    import axios from "axios"
+  //const url = require('url')
     export default {
       name: 'EventsFinder',
 
       data: () => ({
         items: [1, 2, 3, 4, 5, 6, 7],
-
         query: "",
         startIndex: "",
+        organizerId:"",
         countList: [5, 10, 20, 50],
         count: "",
-        sortByList: ["DATE ASC", "DATE DESC", "ALPHABET ASC", "ALPHABET DESC"],
+        sortByList: ["DATE_ASC", "DATE_DESC", "ALPHABET_ASC", "ALPHABET_DESC"],
         sortBy: "",
         categories: [],
         cateItem: [],
@@ -119,36 +128,56 @@
 
 
           search() {
-            // const url = require('url');
-            // const params = new url.URLSearchParams({ q: this.query ,categoryIds:"1"});
-            // axios.post('http://something.com/', params.toString());
 
+            //category -> category ID
             console.log(this.categories)
-           this.categories.forEach(item=>{
-             for(let i = 0; i < 24; i ++){
-               if(item === store.getters.getUpdate[i].name){
-                 this.cateID.push(i+1)
-               }
-             }
-             console.log("hello hello")
-             console.log(this.cateID)
-           })
-            //
-            // axios.get(
-            //     "/event", {
-            //       "q": this.query,
-            //       "categoryid": this.cid_1,
-            //       "categoryid2": this.cid_2,
-            //       "startIndex": this.startIndex,
-            //       "count": this.count,
-            //       "sortBy": this.sortBy
-            //     }).then((response) => {
-            //   console.log(response)
-            // }).catch((e) => {
-            //   console.log(e)
-            // })
+            this.categories.forEach(item=>{
+              for(let i = 0; i < 24; i ++){
+                if(item === store.getters.getUpdate[i].name){
+                  this.cateID.push(i+1)
+                }
+              }
+              console.log("hello hello")
+              console.log(this.cateID)
+            })
+
+            // query generator
+            let params = new URLSearchParams();
+            // let queries = []
+            if(this.query !== ""){
+              params.append("q",this.query)
+            }
+            if(this.cateID !== []){
+              this.cateID.forEach(num=>{
+                params.append("categoryIds",num)
+              })
+            }
+            if(this.organizerId !== ""){
+              params.append('organizerId',this.organizerId)
+            }
+            if(this.sortBy !== ""){
+              params.append("sortBy",this.sortBy)
+            }
+            if(this.count !== ""){
+              params.append("count",this.count)
+            }
+            if(this.startIndex !== ""){
+              params.append("startIndex",this.startIndex)
+            }
+
+            //check params
+            console.log(params)
 
 
+            //generate Params
+            console.log(params.toString());
+
+            //axios request
+            axios.get('/events', {params})
+            .then(response=>{
+              console.log(response.data)
+              this.$store.dispatch("searchFeedBack",response.data)
+            })
           },
 
 

@@ -3,12 +3,21 @@
     <v-banner   elevation="12"
                 class="mt-3"
                 sticky>
-        <v-chip link pill class="orange mr-10">
-            <router-link to="/">Event I Hosted</router-link>
+        <v-chip link pill class="primary mr-10">
+            Event I Hosted
         </v-chip>
 
+    </v-banner>
+  <EventCard />
+  <v-divider />
+
+
+  <v-banner
+      elevation="12"
+      class="mt-3"
+      sticky>
         <v-chip link pill class="error">
-            <router-link to="/">Event I Join</router-link>
+           Event I Join
         </v-chip>
     </v-banner>
 
@@ -20,14 +29,26 @@
 </template>
 
 <script>
-    
+
+    import EventCard from "@/components/EventCard";
+
     export default{
         name:"ManageEvent",
         data(){
             return{
 
             }
-        }
+        },
+        components: {
+          EventCard
+        },
+
+      methods:{
+
+      },
+      computed:{
+
+      }
     }
     
 

@@ -21,7 +21,7 @@ const actions = {
     async getEvents({commit}){
         try{
             const response = await axios.get('/events')
-            console.log("hello mother fucker")
+            console.log(" Vuex action: getEvents called ")
 
             commit("setReNew",response.data)
         }catch(err){
@@ -44,6 +44,9 @@ const actions = {
     },
     //e is event parameter
 
+    searchFeedBack({commit},playLoad){
+        commit("setReNew",playLoad)
+    }
 
 } //send mutation change commit to mutation
 

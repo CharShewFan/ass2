@@ -4,7 +4,7 @@
 <v-container class="my-5">
 
   <v-row>
-    <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in totalEvents" :key="event.index" >
+    <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in otherName" :key="event.index" >
       <v-card>
         <v-img
             class="white--text align-end"
@@ -92,7 +92,7 @@ export default {
 
       show: false,
       pageLength:10,
-      totalEvents : [],
+      totalEvents : mapGetters().allEvents,
       numPerPage:5,
       currentPage:1,
       newList:[],
@@ -121,13 +121,11 @@ export default {
   },
 
   created() {
-    // this.getEvents();
-    // this.getCategories()
+
   },
 
   beforeMount() {
-    //this.getPageNum();
-   // this.newArray()
+
   },
 
   mounted() {
@@ -139,14 +137,17 @@ export default {
     match:(index)=>{
       return this.cateList[index]
     },
-    ...mapGetters(['getUpdate'])
+    ...mapGetters(['getUpdate']),
+    otherName (){
+      return this.$store.getters.allEvents
+    }
   },
 
   methods:{
-    ...mapActions(["getCategories"]),
+    ...mapActions(["getCategories","getEvents"]), // this VueX action retrieve event data from server
 
 
-     async getEvents(){
+     async getEventss(){
       try{
         const response = await axios.get('/events')
         console.log("hello mother fucker")

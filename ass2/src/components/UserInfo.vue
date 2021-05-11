@@ -122,7 +122,7 @@ const id = localStorage.getItem('userId')
       },
 
       mounted() {
-        this.getUerInfo(id)
+        this.getUserInfo(id)
         this.match()
       },
 
@@ -131,22 +131,27 @@ const id = localStorage.getItem('userId')
         },
         methods:{
           async getInfo(){
-             this.id = localStorage.getItem("userId")
-            console.log(this.id)
+            try{
 
-            axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
-            let response = await axios.get(`/users/${parseInt(this.id)}`)
-            if(response.data.email === undefined){
-              this.email = "Login in to check"
+              this.id = localStorage.getItem("userId")
+              console.log(this.id)
+
+              axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
+              let response = await axios.get(`/users/${parseInt(this.id)}`)
+              if(response.data.email === undefined){
+                this.email = "Login in to check"
+              }
+              this.email = response.data.email
+              this.firstName = response.data.firstName
+              this.lastName = response.data.lastName
+              console.log(this.email)
+              console.log(this.firstName)
+              console.log(response)
+            }catch (e){
+              console.log(e)
             }
-                this.email = response.data.email
-                this.firstName = response.data.firstName
-                this.lastName = response.data.lastName
-            console.log(this.email)
-            console.log(this.firstName)
-            console.log(response)
           },
-          ...mapActions(['getUerInfo']),
+          ...mapActions(['getUserInfo']),
 
           match(){
             this.userName = store.getters.isUserName

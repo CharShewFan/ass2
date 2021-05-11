@@ -1,7 +1,10 @@
 
 
 const state = () => ({
-    loginStatus : false
+    loginStatus : false,
+    userName:"",
+    userEmail:"" ,
+
 })
 
 const getters = {
@@ -20,6 +23,8 @@ const actions = {
     logOut({commit}){
          let Status = false
         commit("setStatus",Status)
+        commit("setName")
+        commit("setEmail")
     },
 
     refreshPage({commit}){
@@ -32,6 +37,13 @@ const actions = {
 const mutations = {
     setStatus(state, status) {
         return state.loginStatus = status;
+    },
+
+    setName(state){
+        return state.userName = "";
+    },
+    setEmail(state){
+        return state.userEmail = "";
     }
 }
 

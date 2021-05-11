@@ -56,7 +56,7 @@ export default {
 
 
   methods:{
-   ...mapActions(["logIn","getUerInfo"]),
+   ...mapActions(["logIn","getUserInfo"]),
 
     async Login(){
 
@@ -81,9 +81,10 @@ export default {
 
             if(response.status === 200){
               this.logIn()
+              await this.getUserInfo(localStorage.getItem("userId"))
               let redirect = decodeURIComponent(this.$route.query.redirect || '/')
               await this.$router.push({path:redirect})
-              //await this.getUerInfo(userID)
+
             }else{
               this.error = true;
               this.errorMessages = "please input valid email or correct password"
@@ -95,6 +96,7 @@ export default {
 
           }catch(err)
           {
+
             console.log("miss me?")
             console.log(err)
           }
