@@ -11,19 +11,59 @@
         tile
         class="blue lighten-1 white--text text-center mx-auto px-0 py-0"
         max-height="50px"
-
     >
       <v-card-text class="my-0 py-0 px-0">
+        
+        <a href="https://www.facebook.com/sharer/sharer.php?">
         <v-btn
-            v-for="icon in icons"
-            :key="icon"
             class="mx-4 white--text my-0"
             icon
         >
           <v-icon size="24px">
-            {{ icon }}
+           mdi-facebook
           </v-icon>
         </v-btn>
+        </a>
+
+
+        <a href="https://twitter.com/intent/tweet">
+        <v-btn
+            class="mx-4 white--text my-0"
+            icon
+        
+        >
+          <v-icon size="24px">
+           mdi-twitter
+          </v-icon>
+        </v-btn>
+        </a>
+
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url={articleUrl}&title={articleTitle}&summary={articleSummary}&source={articleSource}
+">
+        <v-btn 
+          class="mx-4 white--text my-0"
+          icon
+        >
+          <v-icon size="24px">
+          mdi-linkedin
+          </v-icon>
+        </v-btn>
+        </a>
+
+
+        <a href="mailto:info@example.com">
+         <v-btn
+            class="mx-4 white--text my-0"
+            icon
+        >
+          <v-icon size="24px">
+           mdi-email
+          </v-icon>
+        </v-btn>
+        </a>
+
+
+        
       </v-card-text>
 
 <!--      <v-card-text class="white&#45;&#45;text pt-0">-->
@@ -51,6 +91,7 @@ export default {
       'mdi-linkedin',
       'mdi-instagram',
       ],
+      links:["https://www.facebook.com/sharer/sharer.php?","https://twitter.com/intent/tweet"]
 }),
 }
 </script>
@@ -59,5 +100,9 @@ export default {
 .card{
   display: block;
   line-height: 50px;
+}
+
+a{
+  text-decoration: none;
 }
 </style>
