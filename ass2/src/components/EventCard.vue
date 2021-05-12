@@ -4,7 +4,7 @@
 <v-container class="my-5">
 
   <v-row>
-    <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in otherName" :key="event.index" >
+    <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in displayLists" :key="event.index" >
       <v-card>
         <v-img
             class="white--text align-end"
@@ -58,7 +58,8 @@
             <v-pagination
                 v-model="currentPage"
                 class="my-4"
-                :length="this.pageLength"
+                :length="pageLength"
+                @input="pageChange"
             ></v-pagination>
           </v-container>
         </v-col>
@@ -92,11 +93,12 @@ export default {
 
       show: false,
       pageLength:10,
-      totalEvents : mapGetters().allEvents,
+      totalEvents :otherName,
       numPerPage:5,
       currentPage:1,
       newList:[],
       pageNum:0,
+      displayLists:[],
 
       selected:[{
         "name":"5",
@@ -128,9 +130,11 @@ export default {
 
   },
 
-  mounted() {
+  mounted:function() {
     this.getEvents();
-    this.getCategories()
+    this.getCategories(),
+    this.length = Math.ceil(this.totalEvents.length / this.pageSize);
+    this.displayLists = this.totalEvents.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page));
   },
 
   computed:{
@@ -158,13 +162,9 @@ export default {
       }
     },
 
-    changePagi(){
-      this.numPerPage = this.selected
-      console.log( this.numPerPage)
-      console.log( "=========================")
-      this.pageLength = Math.ceil(this.totalEvents.length / this.numPerPage)
-     console.log( "=========================")
-      console.log( this.pageLength)
+    pageChange(){
+      this.displayLists = this.totalEvents(this.pageSize*(pageNumber - 1),this.pageSize * (pageNumber));
+
     },
 
     async getPageNum(){
