@@ -8,8 +8,8 @@ import Event from '../views/Event'
 import ManageEvent from "../views/ManageEvents"
 import AddEvent from "../components/AddEvent"
 import UserInfo from "@/components/UserInfo";
-import axios from 'axios'
-axios.defaults.baseURL = "http://localhost:4941/api/v1"
+//import axios from 'axios'
+//axios.defaults.baseURL = "http://localhost:4943/api/v1"
 
 
 Vue.use(VueRouter)

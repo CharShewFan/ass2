@@ -137,7 +137,7 @@ const id = localStorage.getItem('userId')
               console.log(this.id)
 
               axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
-              let response = await axios.get(`/users/${parseInt(this.id)}`)
+              let response = await axios.get(`http://localhost:4943/api/v1/users/${parseInt(this.id)}`)
               if(response.data.email === undefined){
                 this.email = "Login in to check"
               }

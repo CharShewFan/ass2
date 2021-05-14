@@ -5,47 +5,29 @@
 
   <v-row>
     <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in displayLists" :key="event.index" >
-      <v-card>
+      <v-card >
         <v-img
             class="align-end imgText"
             height="200px"
             src="https://picsum.photos/500/300?image=40"
-            
         >
           <v-card-title>{{event.title}}</v-card-title>
         </v-img>
 
-        <v-card-subtitle class="pb-4">{{event.category}}</v-card-subtitle>
+        <v-card-subtitle class="pb-4" >Event ID: {{event.eventId}}</v-card-subtitle>
 
-        <v-card-text class="text--primary">
+        <v-card-text class="text--primary textCard" >
           <div>capacity: {{event.capacity}}</div>
           <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
           <div>attendants: {{event.numAcceptedAttendees}}</div>
-          <div>categories: {{event.categories.toString()}}</div>
+          <div>categories: {{ event.categories | convert}}</div>
 
         </v-card-text>
 
-        <v-card-actions>
-          <v-btn color="error" @click="join" >Join Now</v-btn>
+        <v-card-actions class="btn-box">
+          <v-btn color="error" @click="join(event.eventId)" class="btn-join" >Join Now</v-btn>
           <v-spacer></v-spacer>
-          <v-btn icon @click="show = !show">
-            <v-icon>{{show ? 'mdi-chevron-up':'mdi-chevron-down'}}</v-icon>
-            </v-btn>
-
         </v-card-actions>
-
-
-
-
-        <v-expand-transition>
-          <div v-show="show">
-            <v-divider></v-divider>
-            <v-card-text>
-              {{event.description}}
-            </v-card-text>
-          </div>
-        </v-expand-transition>
-
 
       </v-card>
     </v-col>
@@ -82,6 +64,7 @@
 
 
 import axios from "axios";
+import store from "../store"
 import {mapActions,mapGetters} from "vuex"
 
 export default {
@@ -89,6 +72,29 @@ export default {
   components:{
     
   },
+
+  filters:{
+    convert:function(categories){
+      let categoriesList = ["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
+        "Learning","Photography","Food & Drink","Writing","Language & Culture",
+        "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
+        "Social","Career & Business"
+      ]
+      console.log(categories)
+      categories.forEach((id)=>{
+        if(typeof(id) == "number"){
+          for(let i = 1; i <24; i++){
+            if(id === i){
+              categories[categories.indexOf(id)] = categoriesList[i - 1]
+            }
+          }
+        }
+      })
+
+      return categories.toString()
+    }
+  },
+
   data(){
     return{
 
@@ -98,17 +104,22 @@ export default {
       page:1,
       displayLists:[],
       cateList:[],
-      pageSize:5
+      pageSize:5,
+      categoriesList:["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
+        "Learning","Photography","Food & Drink","Writing","Language & Culture",
+        "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
+          "Social","Career & Business"
+      ]
     }
   },
 
 
 
 
-
   mounted:function() {
-    this.getEvents(),
-    this.getCategories(),
+    this.getEvents()
+    this.getCategories()
+    this.getName(localStorage.getItem("userId"))
 
     this.lists = this.$store.getters.allEvents
     this.length = Math.ceil(this.lists.length / this.pageSize);
@@ -124,10 +135,38 @@ export default {
   },
 
   methods:{
-    ...mapActions(["getCategories","getEvents"]), // this VueX action retrieve event data from server
+    ...mapActions(["getCategories","getEvents","getName"]), // this VueX action retrieve event data from server
 
-    join(){
-      axios.post('/events',{"hello":"world"})
+    join(id){
+      let current = new Date();
+      //console. log(current)
+
+      let time = current.toString();
+      let list = time.split(" ")
+
+     // console.log(localStorage.getItem("userId"))
+     //  console.log(store.getters.isFirstName)
+     //
+     //  console.log(store.getters.isLastName)
+     //  console.log(store.getters.isLogIn)
+     //  console.log(list)
+
+      const strings = list[3]+"-"+"05"+"-"+list[2]+"T"+list[4]+".000Z"
+      // console.log(strings)
+      // console.log(id)
+      if(store.getters.isLogIn === true){
+        axios.post(`http://localhost:4943/api/v1/events/${id}/attendees`,{
+          "attendeeId": localStorage.getItem("userId"),
+          "firstName": store.getters.isFirstName,
+          "lastName": store.getters.isLastName,
+          "dateOfInterest":strings,
+          "status": "accepted"
+        })
+      }else{
+        this.$router.push({name:'login',query:{redirect:'/login'}})
+        //this.$router.push({ name: 'name', query: { redirect: '/path' } });
+      }
+
     },
 
     pageChange(pageNumber){
@@ -145,5 +184,18 @@ export default {
 <style scoped>
 .imgText{
 color:#ff5252
+}
+
+.textCard{
+  height: 150px;
+}
+
+.btn-box{
+  display: flex;
+}
+
+.btn-join{
+  display: block;
+  float: right;
 }
 </style>

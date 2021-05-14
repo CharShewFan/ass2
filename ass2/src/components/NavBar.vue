@@ -26,7 +26,7 @@
    <v-btn icon to = "/userInfo">
     <v-avatar 
       size = "32"
-      color = "grey"
+      color = "primary"
     >
     </v-avatar>
    </v-btn>
@@ -97,7 +97,7 @@
         navList:[
             {"title":"Home","link":"/"},
             {"title":"Events","link":"/event"},
-            {"title":"User","link":"/editUser"},
+            {"title":"User","link":"/userInfo"},
             {"title":"Edit","link":"/editUser"},
           ],
       }),
@@ -108,7 +108,7 @@
         async logout(){
           try{
             console.log("nav bar log out call")
-            let response = await axios.post("/users/logout")
+            let response = await axios.post("http://localhost:4943/api/v1/users/logout")
             console.log(response)
               localStorage.clear()
               this.logOut()

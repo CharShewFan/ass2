@@ -26,7 +26,7 @@ const actions = {
     async getCategories({commit}){
         try{
             let sorted = []
-            const response = await axios.get("/events/categories")
+            const response = await axios.get("http://localhost:4943/api/v1/events/categories")
             console.log(response.data)
            for(let i = 0; i <= 24 ;i++ ){
                for (let j = 0; j <= 23; j++){

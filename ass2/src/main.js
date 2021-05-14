@@ -13,13 +13,14 @@ Vue.config.productionTip = false
 
 // an axios interceptor which set up the header and base route
 const instance = axios.create({
-  baseURL: 'http://localhost:4941/api/v1',
+ // baseURL: 'http://localhost:4943/api/v1',
+    //baseURL:'http://csse-s365docker1.canterbury.ac.nz:4001/api/v1'
 });
 
 let token = localStorage.getItem("token");
 console.log("main js token")
 console.log(token)
-if (token !== null) {
+if (token !== null || token !== undefined) {
     instance.defaults.headers.common['X-Authorization'] = token;
 }
 

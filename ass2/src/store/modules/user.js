@@ -5,7 +5,9 @@ axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token")
 const state = {
   userName:"",
   userEmail:"" ,
-    status:""
+    status:"",
+    firstName:"",
+    lastName:""
 }
 
 
@@ -18,17 +20,41 @@ const getters = {
 
     isEmail:(state)=>{
         return state.userEmail
+    },
+
+    isFirstName:(state)=>{
+        return state.firstName
+    },
+
+    isLastName:(state)=>{
+        return state.lastName
     }
+
 }
 
 const actions = {
     async getUserInfo({commit},id){
         axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
-        const response = await axios.get(`/users/${id}`)
+        const response = await axios.get(`http://localhost:4943/api/v1/users/${id}`)
         if(response.status === 200){
             commit("setName",response.data.firstName +" " + response.data.lastName)
             commit("setEmail",response.data.email)
             commit("setCode","success")
+        }
+
+        if(response.status === 401){
+            commit("setCode","un-authorized")
+
+        }
+    },
+
+    async getName({commit},id){
+        axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
+        const response = await axios.get(`http://localhost:4943/api/v1/users/${id}`)
+        if(response.status === 200){
+            commit("setFName",response.data.firstName)
+            commit("setLName",response.data.lastName)
+
         }
 
         if(response.status === 401){
@@ -47,7 +73,15 @@ const mutations = {
     },
     setCode(state,message){
         return state.status = message
+    },
+    setFName(state,playLoad){
+        return state.firstName = playLoad
+    },
+
+    setLName(state,playLoad){
+        return state.lastName = playLoad
     }
+
 }
 
 
