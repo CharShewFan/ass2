@@ -6,7 +6,7 @@
         class="mx-auto"
     >
       <v-img
-          src="https://cdn.vuetifyjs.com/images/lists/ali.png"
+          :src="require('../assets/userProfileImg.jpeg')"
           height="300px"
           dark
       >
@@ -94,6 +94,7 @@
 
 
 <script>
+//import userImg from "../assets/userProfileImg.jpeg"
 import axios from 'axios'
 import {mapActions,mapGetters} from 'vuex'
 import store from "../store"

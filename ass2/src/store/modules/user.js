@@ -7,7 +7,9 @@ const state = {
   userEmail:"" ,
     status:"",
     firstName:"",
-    lastName:""
+    lastName:"",
+    imageData:{},
+    imageURl:"" // for the image URL send back from server
 }
 
 
@@ -46,7 +48,16 @@ const actions = {
             commit("setCode","un-authorized")
 
         }
+
+
     },
+
+    // async getUserImage({commit,id}){
+    //     const response = await axios.get(`/users/${id}/image`)
+    //     if(response.status === 200){
+    //         commit
+    //     }
+    // },
 
     async getName({commit},id){
         axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')

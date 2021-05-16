@@ -22,15 +22,17 @@
       <v-text-field label="old password" v-model = "oPassword" type="password" clearable outlined></v-text-field>
     </v-col>
 
-<!--    <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">-->
-<!--      <p class="text-caption">Upload Profile Image</p>-->
-<!--      <v-file-input show-size  prepend-icon="mdi-camera" v-model="filename" value="">-->
-<!--      </v-file-input>-->
-<!--    </v-col>-->
+    <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
+      <p class="text-caption">Upload Profile Image</p>
+      <v-file-input show-size  prepend-icon="mdi-camera" v-model="filename" value="">
+      </v-file-input>
+      <v-btn @click="rmProfileImg">Remove Profile Image</v-btn>
 
-    <v-col cols="12" sm = "12" md = "6" lg = "6" xl="6">
-      <v-btn @click = "clear()" class="warning right ">Clear</v-btn>
     </v-col>
+
+<!--    <v-col cols="12" sm = "12" md = "6" lg = "6" xl="6">-->
+<!--      <v-btn @click = "clear()" class="warning right ">Clear</v-btn>-->
+<!--    </v-col>-->
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
       <v-btn @click = "submit()" class="primary right">Submit</v-btn>
@@ -56,8 +58,10 @@ export default {
     }
   },
   compute: {},
-  methods: {
 
+
+  methods: {
+// change user image and profile info
     submit() {
       let userId = localStorage.getItem("userId")
       axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
@@ -67,13 +71,40 @@ export default {
           "lastName": this.nLastName,
           "password": this.nPassword,
           "currentPassword": this.oPassword
+        }).then(response=>{
+          if(response.status === 200){
+            if(this.filename === null || this.filename === "" || this.filename === undefined){
+              let redirect = decodeURIComponent(this.$route.query.redirect || '/userInfo')
+               this.$router.push({path:redirect})
+
+            }else{
+              axios.post("/users/image",{
+                "filename":this.filename
+              }).then(response=>{
+                console.log(response)
+                let redirect = decodeURIComponent(this.$route.query.redirect || '/userInfo')
+                this.$router.push({path:redirect})
+              }).catch(error=>{
+                console.log(error)
+              })
+            }
+          }
         })
       }
-
-
     },
-    clear() {
-      this.nfirstName = ""
+    // clear() {
+    //   this.nfirstName = ""
+    // },
+
+  //remove user image file
+    rmProfileImg(){
+      axios.delete("/users/images").then(response=>{
+        if(response.status === 200){
+          alert("Profile Removed")
+        }
+      }).catch(error=>{
+          console.log(error)
+      })
     }
   }
 }
