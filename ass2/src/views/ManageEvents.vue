@@ -6,9 +6,13 @@
         <v-chip link pill class="primary mr-10">
             Event I Hosted
         </v-chip>
-
     </v-banner>
-  <EventCard />
+
+  <Card btn-name="Delete" display-lists=""/>
+
+
+
+
   <v-divider />
 
 
@@ -30,7 +34,9 @@
 
 <script>
 
-    import EventCard from "@/components/EventCard";
+//import axios from "axios"
+    //import EventCard from "@/components/EventCard";
+    import Card from '@/components/Card'
 
     export default{
         name:"ManageEvent",
@@ -40,11 +46,14 @@
             }
         },
         components: {
-          EventCard
+          Card
         },
 
       methods:{
-
+          getMyEvent(){
+           let myId = localStorage.getItem("userId")
+            console.log(myId)
+          }
       },
       computed:{
 

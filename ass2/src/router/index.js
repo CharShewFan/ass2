@@ -8,6 +8,8 @@ import Event from '../views/Event'
 import ManageEvent from "../views/ManageEvents"
 import AddEvent from "../components/AddEvent"
 import UserInfo from "@/components/UserInfo";
+import EventDetail from "../components/EventDetail";
+//import EventCard from "@/components/EventCard";
 //import axios from 'axios'
 //axios.defaults.baseURL = "http://localhost:4943/api/v1"
 
@@ -73,7 +75,31 @@ const routes = [
     name:"userInfo",
     component: UserInfo,
     meta:{loginRequire: true}
-  }
+  },
+
+  {
+    path:'/event/:id',
+    component: Event,
+    name:"Event",
+    children:[
+      {
+        path:'',
+        component: Event
+      },
+        {
+          path:'detail',
+          component:EventDetail
+        },
+      // {
+      //   path:'all',
+      //   component: EventDetail
+      // }
+
+    ]
+
+  },
+
+
 ]
 
 const router = new VueRouter({

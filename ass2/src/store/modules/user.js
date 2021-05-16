@@ -37,7 +37,7 @@ const getters = {
 const actions = {
     async getUserInfo({commit},id){
         axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
-        const response = await axios.get(`http://localhost:4943/api/v1/users/${id}`)
+        const response = await axios.get(`http://localhost:4941/api/v1/users/${id}`)
         if(response.status === 200){
             commit("setName",response.data.firstName +" " + response.data.lastName)
             commit("setEmail",response.data.email)
@@ -61,7 +61,7 @@ const actions = {
 
     async getName({commit},id){
         axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
-        const response = await axios.get(`http://localhost:4943/api/v1/users/${id}`)
+        const response = await axios.get(`http://localhost:4941/api/v1/users/${id}`)
         if(response.status === 200){
             commit("setFName",response.data.firstName)
             commit("setLName",response.data.lastName)

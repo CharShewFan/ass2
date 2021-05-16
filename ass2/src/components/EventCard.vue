@@ -9,10 +9,11 @@
         <v-img
             class="align-end imgText"
             height="200px"
-            src="https://picsum.photos/500/300?image=40"
+            :src="require('../assets/userProfileImg.jpeg')"
         >
-          <v-card-title>{{event.title}}</v-card-title>
+          <v-card-title @click="toTop"><router-link :to="`/event/${event.eventId}/detail`" > {{event.title}}</router-link></v-card-title>
         </v-img>
+<!--        "{name:`/event`,params:{id:event.eventId}}"-->
 
         <v-card-subtitle class="pb-4" >Event ID: {{event.eventId}}</v-card-subtitle>
 
@@ -104,7 +105,7 @@ export default {
       page:1,
       displayLists:[],
       cateList:[],
-      pageSize:5,
+      pageSize:10,
       categoriesList:["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
         "Learning","Photography","Food & Drink","Writing","Language & Culture",
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
@@ -114,7 +115,10 @@ export default {
   },
 
 
-
+beforeMount() {
+  this.getEvents();
+  this.getName(localStorage.getItem("userId"))
+},
 
   mounted:function() {
     this.getEvents()
@@ -155,15 +159,22 @@ export default {
       // console.log(strings)
       // console.log(id)
       if(store.getters.isLogIn === true){
-        axios.post(`http://localhost:4943/api/v1/events/${id}/attendees`,{
+        axios.post(`http://localhost:4941/api/v1/events/${id}/attendees`,{
           "attendeeId": localStorage.getItem("userId"),
           "firstName": store.getters.isFirstName,
           "lastName": store.getters.isLastName,
           "dateOfInterest":strings,
           "status": "accepted"
+        }).then(response=>{
+          if(response.status === 200){
+            alert(" Join Successfully")
+          }
+          if(response.status == 403){
+            alert("You already Joined")
+          }
         })
       }else{
-        this.$router.push({name:'login',query:{redirect:'/login'}})
+        this.$router.push({path:'/login'})
         //this.$router.push({ name: 'name', query: { redirect: '/path' } });
       }
 
@@ -172,6 +183,10 @@ export default {
     pageChange(pageNumber){
       this.displayLists = this.lists.slice(this.pageSize*(pageNumber - 1),this.pageSize * (pageNumber));
     },
+
+    toTop () {
+      this.$vuetify.goTo(0)
+    }
 
 
 

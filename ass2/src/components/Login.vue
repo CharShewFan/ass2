@@ -63,7 +63,7 @@ export default {
           console.log(this.email)
           console.log(this.password)
           try{
-            let response = await axios.post("http://localhost:4943/api/v1/users/login",{"email":this.email,"password":this.password})
+            let response = await axios.post("http://localhost:4941/api/v1/users/login",{"email":this.email,"password":this.password})
             console.log(this.email)
             console.log(this.password)
 

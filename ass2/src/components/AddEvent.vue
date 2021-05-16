@@ -119,7 +119,7 @@
 
         methods:{
             getCate(){
-                axios.get("http://localhost:4943/api/v1/events/categories").then((response)=>{
+                axios.get("http://localhost:4941/api/v1/events/categories").then((response)=>{
                     console.log(response.data)
                     this.catogories.push(response)
                 }).catch((e)=>{

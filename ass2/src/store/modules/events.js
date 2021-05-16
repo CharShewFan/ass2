@@ -20,7 +20,7 @@ const actions = {
 
     async getEvents({commit}){
         try{
-            const response = await axios.get('http://localhost:4943/api/v1/events')
+            const response = await axios.get('http://localhost:4941/api/v1/events')
             console.log(" Vuex action: getEvents called ")
 
             commit("setReNew",response.data)

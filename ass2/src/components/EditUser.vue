@@ -66,7 +66,7 @@ export default {
       let userId = localStorage.getItem("userId")
       axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
       if (this.nPassword !== "" && this.oPassword !== "") {
-        axios.patch(`http://localhost:4943/api/v1/users/${userId}`, {
+        axios.patch(`http://localhost:4941/api/v1/users/${userId}`, {
           "firstName": this.nfirstName,
           "lastName": this.nLastName,
           "password": this.nPassword,
@@ -98,7 +98,7 @@ export default {
 
   //remove user image file
     rmProfileImg(){
-      axios.delete("/users/images").then(response=>{
+      axios.delete("http://localhost:4941/api/v1/users/images").then(response=>{
         if(response.status === 200){
           alert("Profile Removed")
         }
