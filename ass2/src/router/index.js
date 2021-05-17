@@ -9,6 +9,7 @@ import ManageEvent from "../views/ManageEvents"
 import AddEvent from "../components/AddEvent"
 import UserInfo from "@/components/UserInfo";
 import EventDetail from "../components/EventDetail";
+import AttendeeList from '../components/AttendeeList'
 //import EventCard from "@/components/EventCard";
 //import axios from 'axios'
 //axios.defaults.baseURL = "http://localhost:4943/api/v1"
@@ -90,10 +91,10 @@ const routes = [
           path:'detail',
           component:EventDetail
         },
-      // {
-      //   path:'all',
-      //   component: EventDetail
-      // }
+      {
+        path:'list',
+        component: AttendeeList
+      }
 
     ]
 

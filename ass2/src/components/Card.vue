@@ -15,7 +15,7 @@
             <div>capacity: {{event.capacity}}</div>
             <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
             <div>organizer ID:{{event.organizerId}}</div>
-            <div>attendants: {{event.attendeeCount}}</div>
+            <div><router-link :to="`/event/${event.id}/list`">attendants: {{event.attendeeCount}}</router-link></div>
             <div>categories: {{ event.categories | convert}}</div>
             <div v-if="event.isOnline != 0">OnLine Event </div>
             <div v-if="event.url !== null">URL:{{event.url}}</div>
