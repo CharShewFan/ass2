@@ -105,16 +105,17 @@
       methods:{
         ...mapActions(["logOut"]),
 
-        async logout(){
-          try{
+         logout(){
+
             console.log("nav bar log out call")
-            let response = await axios.post("http://localhost:4943/api/v1/users/logout")
-            console.log(response)
+            axios.post("http://localhost:4941/api/v1/users/logout").then(response=>{
+              console.log(response)
               localStorage.clear()
               this.logOut()
-          }catch (e) {
-            console.log(e)
-          }
+            }).catch(err=>{   console.log(err)})
+
+
+
         },
 
         toggle(){

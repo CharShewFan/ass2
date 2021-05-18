@@ -137,25 +137,26 @@ import store from "../store"
         },
         methods:{
           async getInfo(){
-            try{
+
 
               this.id = localStorage.getItem("userId")
               console.log(this.id)
 
               axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
-              let response = await axios.get(`http://localhost:4941/api/v1/users/${parseInt(this.id)}`)
-              if(response.data.email === undefined){
-                this.email = "Login in to check"
-              }
-              this.email = response.data.email
-              this.firstName = response.data.firstName
-              this.lastName = response.data.lastName
-              console.log(this.email)
-              console.log(this.firstName)
-              console.log(response)
-            }catch (e){
-              console.log(e)
-            }
+              axios.get(`http://localhost:4941/api/v1/users/${parseInt(this.id)}`).then(response=>{
+                if(response.data.email === undefined){
+                  this.email = "Login in to check"
+                }
+                this.email = response.data.email
+                this.firstName = response.data.firstName
+                this.lastName = response.data.lastName
+                console.log(this.email)
+                console.log(this.firstName)
+                console.log(response)
+              }).catch(err=>{
+                console.log(err)
+              })
+
           },
           ...mapActions(['getUserInfo']),
 

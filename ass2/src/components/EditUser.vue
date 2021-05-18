@@ -37,7 +37,8 @@
                     prepend-icon="mdi-camera"
                     id="avatar"
                     accept="image/png, image/jpeg,image/jpg,image/gif"
-                    v-model="file"
+                    v-model="this.file"
+                    @change="processFile($event)"
       >
       </v-file-input>
       <v-btn @click="rmProfileImg">Remove Profile Image</v-btn>
@@ -115,41 +116,49 @@ export default {
         })
       }
 
-      let reader  = new FileReader();
+      // let reader  = new FileReader();
       //console.log(this.file)
      // console.log(this.file.type)
-      reader.onload = function (){
-        this.data = reader.result
-        console.log(this.data)
-        console.log(typeof (this.data))
-      }
-      reader.readAsArrayBuffer(this.file)
+     //  reader.onload = function (){
+     //    this.data = reader.result
+     //    console.log(this.data)
+     //    console.log(typeof (this.data))
+     //  }
+     //  reader.readAsArrayBuffer(this.file)
 
 
 
       axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
 
-      let req = new XMLHttpRequest();
-      req.open("PUT", `http://localhost:4941/api/v1/users/${userId}/image`,true)
-      req.onload = function(){
-        alert("Upload Success!")
-      }
-      req.setRequestHeader("content-type", this.file.type);
-      req.setRequestHeader("X-Authorization", localStorage.getItem("token"));
-      req.send(this.data)
-      // const options = {
-      //   method:"put",
-      //   headers:{"content-type":`${this.file.type}`},
-      //   data:this.data,
-      //   url: `http://localhost:4941/api/v1/users/${userId}/image`
+      // let req = new XMLHttpRequest();
+      // req.open("PUT", `http://localhost:4941/api/v1/users/${userId}/image`,true)
+      // req.onload = function(){
+      //   alert("Upload Success!")
       // }
-      // axios(options).then(response=>{console.log(response)
-      // }).catch(err=>{
-      //   console.log(err)
-      // })
+      // req.setRequestHeader("content-type", this.file.type);
+      // req.setRequestHeader("X-Authorization", localStorage.getItem("token"));
+      // req.send(this.data)
+
+      const options = {
+        method:"put",
+        headers:{"content-type":`${this.file.type}`},
+        data:this.file,
+        url: `http://localhost:4941/api/v1/users/${userId}/image`
+      }
+      axios(options).then(response=>{console.log(response)
+      }).catch(err=>{
+        console.log(err)
+      })
 
     },
 
+     processFile (ev) {
+
+       this.file = ev.target.files
+       console.log(this.file)
+       console.log("-----------")
+       console.log(document.getElementById("avatar").value)
+    },
 
   //remove user image file
     rmProfileImg(){
