@@ -1,5 +1,14 @@
 <template>
   <div>
+
+    <v-alert elevation="10"
+             v-show="error"
+             :type="this.type"
+             :color="this.color"
+    >
+      {{errorMessages}}
+    </v-alert>
+
     <v-card flat class="mt-8">
       <v-card-title>Edit User Info</v-card-title>
     </v-card>
@@ -24,7 +33,12 @@
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
       <p class="text-caption">Upload Profile Image</p>
-      <v-file-input show-size  prepend-icon="mdi-camera" v-model="filename" value="">
+      <v-file-input show-size
+                    prepend-icon="mdi-camera"
+                    id="avatar"
+                    accept="image/png, image/jpeg,image/jpg,image/gif"
+                    v-model="file"
+      >
       </v-file-input>
       <v-btn @click="rmProfileImg">Remove Profile Image</v-btn>
 
@@ -54,7 +68,14 @@ export default {
       nLastName: "",
       nPassword: "",
       oPassword: "",
-      filename: ""
+      filename: "",
+      file:null,
+      data:null,
+
+      error:false,
+      errorMessages:"",
+      type:"",
+      color:""
     }
   },
   compute: {},
@@ -63,6 +84,19 @@ export default {
   methods: {
 // change user image and profile info
     submit() {
+      // //check empty form
+      // console.log(this.nfirstName)
+      // console.log(typeof( this.nfirstName))
+      // if(this.nfirstName === "" && this.nLastName === "" && this.nPassword === "" && this.oPassword === ""){
+      //   this.error = true;
+      //   this.errorMessages = "please fill in some field before submit"
+      //   this.type = "warning"
+      //   this.color = "red"
+      // }
+      // console.log(this.color)
+
+
+
       let userId = localStorage.getItem("userId")
       axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
       if (this.nPassword !== "" && this.oPassword !== "") {
@@ -76,31 +110,57 @@ export default {
             if(this.filename === null || this.filename === "" || this.filename === undefined){
               let redirect = decodeURIComponent(this.$route.query.redirect || '/userInfo')
                this.$router.push({path:redirect})
-
-            }else{
-              axios.post("/users/image",{
-                "filename":this.filename
-              }).then(response=>{
-                console.log(response)
-                let redirect = decodeURIComponent(this.$route.query.redirect || '/userInfo')
-                this.$router.push({path:redirect})
-              }).catch(error=>{
-                console.log(error)
-              })
             }
           }
         })
       }
+
+      let reader  = new FileReader();
+      //console.log(this.file)
+     // console.log(this.file.type)
+      reader.onload = function (){
+        this.data = reader.result
+        console.log(this.data)
+        console.log(typeof (this.data))
+      }
+      reader.readAsArrayBuffer(this.file)
+
+
+
+      axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
+
+      let req = new XMLHttpRequest();
+      req.open("PUT", `http://localhost:4941/api/v1/users/${userId}/image`,true)
+      req.onload = function(){
+        alert("Upload Success!")
+      }
+      req.setRequestHeader("content-type", this.file.type);
+      req.setRequestHeader("X-Authorization", localStorage.getItem("token"));
+      req.send(this.data)
+      // const options = {
+      //   method:"put",
+      //   headers:{"content-type":`${this.file.type}`},
+      //   data:this.data,
+      //   url: `http://localhost:4941/api/v1/users/${userId}/image`
+      // }
+      // axios(options).then(response=>{console.log(response)
+      // }).catch(err=>{
+      //   console.log(err)
+      // })
+
     },
-    // clear() {
-    //   this.nfirstName = ""
-    // },
+
 
   //remove user image file
     rmProfileImg(){
-      axios.delete("http://localhost:4941/api/v1/users/images").then(response=>{
+      let id = localStorage.getItem("userId")
+      //const file = document.getElementById("avatar").value
+
+      axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')
+      axios.delete(`http://localhost:4941/api/v1/users/${id}/image`).then(response=>{
         if(response.status === 200){
           alert("Profile Removed")
+          this.$route.push({path:"/userInfo"})
         }
       }).catch(error=>{
           console.log(error)

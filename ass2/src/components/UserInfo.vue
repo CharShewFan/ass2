@@ -6,7 +6,7 @@
         class="mx-auto"
     >
       <v-img
-          :src="require('../assets/userProfileImg.jpeg')"
+          :src="this.URL"
           height="300px"
           dark
       >
@@ -37,7 +37,7 @@
 
           <v-card-title class="white--text pl-12 pt-12">
             <div class="display-1 pl-12 pt-12">
-              {{this.userName }}
+              {{ this.$store.getters.isUserName }}
             </div>
           </v-card-title>
         </v-row>
@@ -73,7 +73,7 @@
 
           <v-list-item-content>
             <v-list-item-title> E-mail:</v-list-item-title>
-          <v-list-item-subtitle class="empty"> {{this.email}} </v-list-item-subtitle>
+          <v-list-item-subtitle class="empty"> {{this.$store.getters.isEmail }} </v-list-item-subtitle>
           </v-list-item-content>
 
         </v-list-item>
@@ -98,7 +98,7 @@
 import axios from 'axios'
 import {mapActions,mapGetters} from 'vuex'
 import store from "../store"
-const id = localStorage.getItem('userId')
+
     export default{
 
         name:"userInfo",
@@ -106,7 +106,8 @@ const id = localStorage.getItem('userId')
          userName:"",
           email:"",
           id:"",
-          empty:""
+          empty:"",
+          URL: require('../assets/userProfileImg.jpeg')
         }),
 
       beforeCreate() {
@@ -114,19 +115,21 @@ const id = localStorage.getItem('userId')
       },
 
       beforeMount() {
-        this.getUserInfo(id);
-        this.isUserName();
-        this.isEmail()
+        // this.getUserInfo(id);
+        // this.isUserName();
+        // this.isEmail()
       },
 
       computed:{
           ...mapGetters(['isUserName','isEmail']),
 
+
       },
 
       mounted() {
-        this.getUserInfo(id)
+        this.getUserInfo(localStorage.getItem("userId"))
         this.match()
+        this.getUserImage()
       },
 
       components:{
@@ -160,7 +163,56 @@ const id = localStorage.getItem('userId')
             this.userName = store.getters.isUserName
             this.id = localStorage.getItem("userId")
             this.email = store.getters.isEmail
+          },
+
+          getUserImage(){
+            this.id = localStorage.getItem("userId")
+            axios.get(`http://localhost:4941/api/v1/users/${this.id}/image`,{responseType:'arraybuffer'}).then(response=>{
+              if(response.status === 200){
+                console.log(response.headers)
+                console.log(response.status)
+                console.log(response.data)
+                const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
+                this.URL = url
+                console.log(url)
+              }
+            }).catch(error=>{
+              console.log("error catch")
+              console.log(error)
+            })
           }
+
+
+//           Blob {
+//             name: "图片示例：jartto.png",
+//             preview: "blob:file:///f3823a2a-2908-44cb-81e2-c19d98abc5d1",
+//             size: 47396,
+//             type: "image/png",
+//           }
+//           var blob = new Blob([typedArray.buffer], {type: 'application/octet-stream'});
+// //
+//           作者：Jartto
+// 链接：https://juejin.cn/post/6844903553140523021
+//     来源：掘金
+// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
+          //
+          // axios.get("http://my-server:8080/reports/my-sample-report/",
+          //     {
+          //       responseType: 'arraybuffer',
+          //       headers: {
+          //         'Content-Type': 'application/json',
+          //         'Accept': 'application/pdf'
+          //       }
+          //     })
+          //     .then((response) => {
+          //       const url = window.URL.createObjectURL(new Blob([response.data]));
+          //       const link = document.createElement('a');
+          //       link.href = url;
+          //       link.setAttribute('download', 'file.pdf'); //or any other extension
+          //       document.body.appendChild(link);
+          //       link.click();
+          //     })
+          //     .catch((error) => console.log(error));
 
         },
 

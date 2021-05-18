@@ -1,5 +1,12 @@
 <template>
     <v-container>
+      <v-alert elevation="10"
+               v-show="error"
+               :type="this.type"
+               :color="this.color"
+      >
+        {{errorMessages}}
+      </v-alert>
       <v-card flat>
         <v-card-title>
           Sign Up
@@ -9,7 +16,6 @@
     <v-form class="ml-3">
       <v-text-field
         v-model="firstname"
-        :error-messages="nameErrors"
         :counter="10"
         label="first name"
         required
@@ -19,7 +25,6 @@
 
       <v-text-field
       v-model="lastname"
-      :error-messages="nameErrors"
       :counter="10"
       label="last name"
       required
@@ -38,7 +43,6 @@
 
       <v-text-field
       v-model="password"
-      :error-messages="passwordErrors"
       label="Password"
       required
       @input="$v.password.$touch()"
@@ -105,8 +109,11 @@
         email: '',
         password:"",
         userInfo:[],
-        info:""
-        
+        info:"",
+        error:false,
+        errorMessages:"",
+        type:"",
+        color:""
       }),
   
       computed: {
@@ -141,17 +148,21 @@
          submit () {
            localStorage.setItem("email",this.email)
            localStorage.setItem("password",this.password)
-           axios.post('/users/register',{
+           axios.post('http://localhost:4941/api/v1/users/register',{
               "firstName":this.firstname,
               "lastName":this.lastname,
               "email":this.email,
               "password":this.password
           }).then(response=>{
             console.log(response.data)
-            alert("Sign Up success")
+             this.error = true
+             this.type = "success"
+             this.color = "green"
+             this.errorMessages = "Sign Up successfully ! Now jump to Home page"
+            //alert("Sign Up success")
              //this.$route.push({path:'/userInfo'})
           }).then(()=>{
-              axios.post('/users/login',{
+              axios.post("http://localhost:4941/api/v1/users/login",{
                 "email":localStorage.getItem("email"),
                 "password":localStorage.getItem("password")
               }
@@ -176,7 +187,14 @@
            )
                .catch(
             error => {
-              alert (error)
+              console.log(error.message)
+              if(error.message === "Request failed with status code 400"){
+                this.error = true;
+                this.errorMessages = "Email Had Been Taken"
+                this.type = "warning"
+                this.color = "red"
+              }
+
             }
           )
         },
@@ -186,7 +204,6 @@
           this.email = ''
           this.lastname = ''
           this.password = ''
-  
         },
       },
     }

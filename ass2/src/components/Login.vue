@@ -79,26 +79,33 @@ export default {
             this.color = "green"
             this.errorMessages = "login in successfully"
 
-            if(response.status === 200){
               this.logIn()
               await this.getUserInfo(localStorage.getItem("userId"))
+
+
               let redirect = decodeURIComponent(this.$route.query.redirect || '/')
               await this.$router.push({path:redirect})
 
-            }else{
+
+              // this.error = true;
+              // this.errorMessages = "please input valid email or correct password"
+              // this.type = "information"
+              // this.color = "green"
+
+
+
+
+          }catch(err)
+          {
+            //console.log("miss me?")
+            //console.log(err)
+            if(err.message === "Request failed with status code 400"){
               this.error = true;
               this.errorMessages = "please input valid email or correct password"
               this.type = "warning"
               this.color = "red"
             }
 
-
-
-          }catch(err)
-          {
-
-            console.log("miss me?")
-            console.log(err)
           }
     }
 

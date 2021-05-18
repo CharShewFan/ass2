@@ -8,11 +8,15 @@
 
 <!--      <v-btn><v-icon></v-icon></v-btn>-->
       <li v-for="attendee in attendees" :key="attendee.index">
-        <h4>Attendee ID : {{attendee.attendeeId}}</h4>
-        <h4>Attendee Name: {{attendee.firstName}}  {{attendee.lastName}}</h4>
+        <v-banner
+            elevation="10"
+        >
+        <h4 class="mb-3">Attendee ID : {{attendee.attendeeId}}</h4>
+        <h4 class="mb-1">Attendee name: {{attendee.firstName}}  {{attendee.lastName}}</h4>
         <h5>Interested Date:  {{attendee.dateOfInterest | toDate()}}</h5>
 
-        <h5 class="mb-5">Join Status:  {{attendee.status}}</h5>
+        <h5 class="mb-2">Join Status:  {{attendee.status}}</h5>
+        </v-banner>
         <v-divider></v-divider>
       </li>
 
@@ -111,5 +115,7 @@ export default {
 </script>
 
 <style scoped>
-
+li{
+  list-style-type:none
+}
 </style>
