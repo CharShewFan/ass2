@@ -115,14 +115,16 @@ import store from "../store"
       },
 
       beforeMount() {
-        // this.getUserInfo(id);
-        // this.isUserName();
-        // this.isEmail()
+
       },
 
       computed:{
           ...mapGetters(['isUserName','isEmail']),
 
+
+      },
+
+      updated() {
 
       },
 
@@ -182,38 +184,6 @@ import store from "../store"
               console.log(error)
             })
           }
-
-
-//           Blob {
-//             name: "图片示例：jartto.png",
-//             preview: "blob:file:///f3823a2a-2908-44cb-81e2-c19d98abc5d1",
-//             size: 47396,
-//             type: "image/png",
-//           }
-//           var blob = new Blob([typedArray.buffer], {type: 'application/octet-stream'});
-// //
-//           作者：Jartto
-// 链接：https://juejin.cn/post/6844903553140523021
-//     来源：掘金
-// 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。
-          //
-          // axios.get("http://my-server:8080/reports/my-sample-report/",
-          //     {
-          //       responseType: 'arraybuffer',
-          //       headers: {
-          //         'Content-Type': 'application/json',
-          //         'Accept': 'application/pdf'
-          //       }
-          //     })
-          //     .then((response) => {
-          //       const url = window.URL.createObjectURL(new Blob([response.data]));
-          //       const link = document.createElement('a');
-          //       link.href = url;
-          //       link.setAttribute('download', 'file.pdf'); //or any other extension
-          //       document.body.appendChild(link);
-          //       link.click();
-          //     })
-          //     .catch((error) => console.log(error));
 
         },
 
