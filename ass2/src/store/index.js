@@ -4,6 +4,7 @@ import Events from './modules/events'
 import LogIn from './modules/login'
 import User from './modules/user'
 import Cate from './modules/categories'
+import eventImage from "@/store/modules/eventImage";
 
 Vue.use(Vuex)
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     Events,
     LogIn,
     User,
-    Cate
+    Cate,
+    eventImage
   }
 })

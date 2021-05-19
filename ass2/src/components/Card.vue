@@ -1,12 +1,14 @@
 <template>
-  <v-container class="my-5">
+  <v-container class="my-5 d-flex justify-center" >
+    <v-row class="d-flex justify-center">
+      <v-col sm="12" md="4" lg="3" xl="3">
         <v-card>
           <v-img
               class="align-end imgText"
               height="200px"
-              :src="require('../assets/userProfileImg.jpeg')"
+              :src="this.URL"
           >
-            <v-card-title>{{event.title}}</v-card-title>
+            <v-card-title class="white--text ">{{event.title}}</v-card-title>
           </v-img>
 
           <v-card-subtitle class="pb-4" >Event ID: {{event.id}}</v-card-subtitle>
@@ -37,9 +39,8 @@
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
-
-
-
+      </v-col>
+    </v-row>
 
   </v-container>
 
@@ -61,21 +62,7 @@ name: "Card",
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
         "Social","Career & Business"
       ]
-      console.log(categories)
-      console.log(categories.length)
-      // categories.forEach((id)=>{
-      //   if(typeof(id) == "number"){
-      //     for(let i = 1; i <24; i++){
-      //       if(id === i){
-      //         categories[categories.indexOf(id)] = categoriesList[i - 1]
-      //       }
-      //     }
-      //   }
-      // })
 
-
-
-      //123
       for(let i = 0; i < categories.length; i++){
         if(typeof(categories[i]) == "number"){
           for(let j = 1; j <24; j++){
@@ -120,9 +107,21 @@ name: "Card",
 
   },
 
+  mounted(){
+    this.getImage()
+  },
+
+  watch:{
+    '$route.params.id': function () {
+      this.getImage()
+
+    }
+  },
+
   data(){
   return{
-    joined:false
+    joined:false,
+    URL:"require('../assets/userProfileImg.jpeg')"
   }
   },
 
@@ -178,7 +177,16 @@ name: "Card",
     },
 
 
-    //hide join button for expried event
+    //get event image
+    getImage(){
+      let id = this.$route.params.id
+      axios.get(`http://localhost:4941/api/v1/events/${id}/image`, {responseType: 'arraybuffer'}).then(response=>{
+        const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
+        this.URL = url
+        console.log(this.URL)
+      }).catch(e=>{
+      console.log(e)})
+    }
 
 
   }

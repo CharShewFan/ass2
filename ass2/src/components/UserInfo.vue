@@ -179,7 +179,7 @@ import store from "../store"
                 // console.log(response.data)
                 const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
                 this.URL = url
-               // console.log(url)
+               console.log(url)
               }
             }).catch(error=>{
               // console.log("error catch")

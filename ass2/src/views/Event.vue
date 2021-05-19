@@ -9,21 +9,8 @@
         <v-chip class="mr-5 orange" >
             <router-link to="/addEvent">Creat Event</router-link>
         </v-chip>
-
-<!--      <v-chip class="mr-5 orange" >-->
-<!--        <router-link to="/event/all">Jump Event</router-link>-->
-<!--      </v-chip>-->
-
-<!--      <v-chip class="mr-5 orange" >-->
-<!--        <router-link to="/event/all/detail">Jump Event</router-link>-->
-<!--      </v-chip>-->
-
-<!--      <h2>path: /event/{{this.$route.params.id}}</h2>-->
       <router-view></router-view>
     <EventCard></EventCard>
-      
-    
-
 
     </v-container>
 

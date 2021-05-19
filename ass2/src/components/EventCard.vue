@@ -9,11 +9,11 @@
         <v-img
             class="align-end imgText"
             height="200px"
-            :src="require('../assets/userProfileImg.jpeg')"
+            src="blob:http://localhost:8080/5920381e-4cd2-499e-81af-a7e7affdcaf1"
+
         >
           <v-card-title @click="toTop"><router-link :to="`/event/${event.eventId}/detail`" > {{event.title}}</router-link></v-card-title>
         </v-img>
-<!--        "{name:`/event`,params:{id:event.eventId}}"-->
 
         <v-card-subtitle class="pb-4" >Event ID: {{event.eventId}}</v-card-subtitle>
 
@@ -81,7 +81,7 @@ export default {
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
         "Social","Career & Business"
       ]
-      console.log(categories)
+      //console.log(categories)
       categories.forEach((id)=>{
         if(typeof(id) == "number"){
           for(let i = 1; i <24; i++){
@@ -115,10 +115,10 @@ export default {
   },
 
 
-beforeMount() {
-  this.getEvents();
-  this.getName(localStorage.getItem("userId"))
-},
+  beforeMount() {
+    this.getEvents();
+    this.getName(localStorage.getItem("userId"))
+  },
 
   updated() {
     this.getEvents()
@@ -128,6 +128,8 @@ beforeMount() {
     this.getEvents()
     this.getCategories()
     this.getName(localStorage.getItem("userId"))
+    //this.reqImage()
+
 
     this.lists = this.$store.getters.allEvents
     this.length = Math.ceil(this.lists.length / this.pageSize);
@@ -143,7 +145,7 @@ beforeMount() {
   },
 
   methods:{
-    ...mapActions(["getCategories","getEvents","getName"]), // this VueX action retrieve event data from server
+    ...mapActions(["getCategories","getEvents","getName","reqImage"]), // this VueX action retrieve event data from server
 
 
 

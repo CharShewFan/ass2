@@ -27,7 +27,7 @@ const actions = {
         try{
             let sorted = []
             const response = await axios.get("http://localhost:4941/api/v1/events/categories")
-            console.log(response.data)
+            //console.log(response.data)
            for(let i = 0; i <= 24 ;i++ ){
                for (let j = 0; j <= 23; j++){
                    if(response.data[j].id  === i) {
@@ -35,7 +35,7 @@ const actions = {
                    }
                }
             }
-            console.log(sorted)
+            //console.log(sorted)
             commit("addCate",sorted)
         }catch (e) {
             console.log(e)
