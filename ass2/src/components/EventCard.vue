@@ -69,7 +69,7 @@
 import {mapActions,mapGetters} from "vuex"
 
 export default {
-  name: "EventCard",
+  //name: "EventCard",
   components:{
     
   },

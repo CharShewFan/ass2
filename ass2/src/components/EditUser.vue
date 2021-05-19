@@ -49,7 +49,7 @@
 <script>
 import axios from 'axios'
 export default {
-  name: "EditUser",
+  //name: "EditUser",
   data() {
     return {
       nfirstName: "",

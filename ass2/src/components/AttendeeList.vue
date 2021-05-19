@@ -48,7 +48,7 @@ export default {
   },
 
   updated() {
-    this.getAttendeeList()
+    //this.getAttendeeList()
   },
 
   mounted() {

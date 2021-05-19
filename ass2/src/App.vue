@@ -1,7 +1,6 @@
 <template>
   <v-app class="grey lighten-4">
-
-    <NavBar/>
+  <NavBar/>
 
     <v-main class="main">
     <router-view></router-view>
@@ -19,7 +18,7 @@ import {mapGetters,mapActions} from 'vuex';
 
 
 export default {
-  name: 'App',
+  //name: 'App',
   computed:mapGetters(["isLogIn"]),
   components: {
    NavBar,

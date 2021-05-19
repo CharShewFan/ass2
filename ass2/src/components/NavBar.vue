@@ -27,7 +27,9 @@
     <v-avatar 
       size = "32"
       color = "primary"
+
     >
+      <img :src="this.imageSrc" alt="avatar" :key="this.imageSrc">
     </v-avatar>
    </v-btn>
 
@@ -70,8 +72,8 @@
 
     <v-list dense nav v-show="isLogIn">
       <v-list-item-group>
-        <v-list-item @click="logOut" to="/">
-          <v-list-item-title @click="logout">Log out</v-list-item-title>
+        <v-list-item @click="this.logout" to="/">
+          <v-list-item-title @click="this.logout">Log out</v-list-item-title>
         </v-list-item>
       </v-list-item-group>
     </v-list>
@@ -89,7 +91,7 @@
   import {mapGetters,mapActions} from 'vuex';
 
     export default {
-      name: 'NavBar',
+     // name: 'NavBar',
   
       data: () => ({
         drawer:false,
@@ -100,14 +102,26 @@
             {"title":"User","link":"/userInfo"},
             {"title":"Edit","link":"/editUser"},
           ],
+
+        imageSrc: require('../assets/userProfileImg.jpeg')
       }),
       computed:mapGetters(["isLogIn"]),
+
+      watcher:{
+
+      },
+
+      beforeMount() {
+        this.getProfileImage()
+      },
+      mounted() {
+        this.getProfileImage()
+      },
       methods:{
         ...mapActions(["logOut"]),
 
-         logout(){
-
-            console.log("nav bar log out call")
+        logout(){
+            //console.log("nav bar log out call")
             axios.post("http://localhost:4941/api/v1/users/logout").then(response=>{
               console.log(response)
               localStorage.clear()
@@ -121,6 +135,19 @@
         toggle(){
           this.drawer = !this.drawer
         },
+
+        getProfileImage(){
+            let id = localStorage.getItem("userId")
+            axios.get(`http://localhost:4941/api/v1/users/${id}/image`,{responseType:'arraybuffer'}).then(response=> {
+              if (response.status === 200) {
+                const url = window.URL.createObjectURL(new Blob([response.data], {type: ['image/png', 'image/jpg', 'image/gif']}));
+                this.imageSrc = url
+              }
+            }).catch(err=>{
+              console.log(err)
+            })
+
+        }
 
       }
     }

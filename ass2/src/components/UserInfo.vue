@@ -101,7 +101,7 @@ import store from "../store"
 
     export default{
 
-        name:"userInfo",
+        //name:"userInfo",
         data:()=>({
          userName:"",
           email:"",
