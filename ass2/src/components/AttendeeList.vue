@@ -52,8 +52,8 @@ export default {
   },
 
   mounted() {
-    this.getAttendeeList();
-    this.getUserImage()
+    // this.getAttendeeList();
+     this.getUserImage()
 
   },
 

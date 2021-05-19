@@ -32,9 +32,9 @@
 
           <v-card-actions class="btn-box">
             <v-btn color="primary"  to="/event" >{{this.btnName}}</v-btn>
+            <v-btn color="error"  @click="this.join" >{{this.btnName2}}</v-btn>
             <v-spacer></v-spacer>
           </v-card-actions>
-
         </v-card>
 
 
@@ -45,6 +45,11 @@
 </template>
 
 <script>
+
+
+import store from "@/store";
+import axios from "axios";
+
 export default {
 name: "Card",
 
@@ -55,7 +60,7 @@ name: "Card",
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
         "Social","Career & Business"
       ]
-      console.log(categories)
+      //console.log(categories)
       categories.forEach((id)=>{
         if(typeof(id) == "number"){
           for(let i = 1; i <24; i++){
@@ -71,7 +76,7 @@ name: "Card",
 
     toDate(date){
       let stringList = date.slice(0,-5).split("T")
-      console.log(stringList)
+      //console.log(stringList)
       return "Date:  "+  stringList[0]+"  "+"Time:"+"  "+stringList[1]
     },
 
@@ -86,14 +91,44 @@ name: "Card",
 
   },
   props:{
-      event:Array,
+      event:Object,
       btnName:String,
+      btnName2:String,
+
   },
 
   data(){
   return{
 
   }
+  },
+
+  methods:{
+    join(){
+      let id = this.$route.params.id
+      // let current = new Date();
+      // let time = current.toString();
+      // let list = time.split(" ")
+      // const strings = list[3]+"-"+"05"+"-"+list[2]+"T"+list[4]+".000Z"
+      //
+
+      if(store.getters.isLogIn === true){
+        axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token")
+        axios.post(`http://localhost:4941/api/v1/events/${id}/attendees`
+        ).then(response=>{
+          if(response.status === 200){
+            alert(" Join Successfully")
+          }
+          if(response.status === 403){
+            alert("You already Joined")
+          }
+        })
+      }else{
+        this.$router.push({path:'/login'})
+        //this.$router.push({ name: 'name', query: { redirect: '/path' } });
+      }
+
+    },
   }
 }
 </script>

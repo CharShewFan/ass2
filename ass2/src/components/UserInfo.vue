@@ -115,7 +115,9 @@ import store from "../store"
       },
 
       beforeMount() {
-
+        this.getUserInfo(localStorage.getItem("userId"))
+        this.match()
+        this.getUserImage()
       },
 
       computed:{
@@ -172,15 +174,15 @@ import store from "../store"
             this.id = localStorage.getItem("userId")
             axios.get(`http://localhost:4941/api/v1/users/${this.id}/image`,{responseType:'arraybuffer'}).then(response=>{
               if(response.status === 200){
-                console.log(response.headers)
-                console.log(response.status)
-                console.log(response.data)
+                // console.log(response.headers)
+                // console.log(response.status)
+                // console.log(response.data)
                 const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
                 this.URL = url
-                console.log(url)
+               // console.log(url)
               }
             }).catch(error=>{
-              console.log("error catch")
+              // console.log("error catch")
               console.log(error)
             })
           }

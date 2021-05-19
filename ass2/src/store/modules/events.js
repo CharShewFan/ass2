@@ -18,16 +18,24 @@ const getters = {
 
 const actions = {
 
-    async getEvents({commit}){
-        try{
-            const response = await axios.get('http://localhost:4941/api/v1/events')
-            console.log(" Vuex action: getEvents called ")
+    // async getEvents({commit}){
+    //     try{
+    //         const response = await axios.get('http://localhost:4941/api/v1/events')
+    //         console.log(" Vuex action: getEvents called ")
+    //
+    //         commit("setReNew",response.data)
+    //     }catch(err){
+    //         console.log(err)
+    //         commit("setReNew","event loading failed")
+    //     }
+    // },
 
+    getEvents({commit}){
+        axios.get("http://localhost:4941/api/v1/events").then(response=>{
             commit("setReNew",response.data)
-        }catch(err){
+        }).catch(err=>{
             console.log(err)
-            commit("setReNew","event loading failed")
-        }
+        })
     },
 
     selectEvent({commit}){

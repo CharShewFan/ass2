@@ -49,10 +49,6 @@ const actions = {
 
             }
         }).catch(err=>{console.log(err)})
-
-
-
-
     },
 
     // async getUserImage({commit,id}){

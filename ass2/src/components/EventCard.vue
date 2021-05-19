@@ -26,7 +26,7 @@
         </v-card-text>
 
         <v-card-actions class="btn-box">
-          <v-btn color="error" @click="join(event.eventId)" class="btn-join" >Join Now</v-btn>
+          <v-btn color="error" :to="`/event/${event.eventId}/detail`" class="btn-join" > Details</v-btn>
           <v-spacer></v-spacer>
         </v-card-actions>
 
@@ -64,8 +64,8 @@
 <script>
 
 
-import axios from "axios";
-import store from "../store"
+//import axios from "axios";
+//import store from "../store"
 import {mapActions,mapGetters} from "vuex"
 
 export default {
@@ -120,6 +120,10 @@ beforeMount() {
   this.getName(localStorage.getItem("userId"))
 },
 
+  updated() {
+    this.getEvents()
+  },
+
   mounted:function() {
     this.getEvents()
     this.getCategories()
@@ -141,44 +145,7 @@ beforeMount() {
   methods:{
     ...mapActions(["getCategories","getEvents","getName"]), // this VueX action retrieve event data from server
 
-    join(id){
-      let current = new Date();
-      //console. log(current)
 
-      let time = current.toString();
-      let list = time.split(" ")
-
-     // console.log(localStorage.getItem("userId"))
-     //  console.log(store.getters.isFirstName)
-     //
-     //  console.log(store.getters.isLastName)
-     //  console.log(store.getters.isLogIn)
-     //  console.log(list)
-
-      const strings = list[3]+"-"+"05"+"-"+list[2]+"T"+list[4]+".000Z"
-      // console.log(strings)
-      // console.log(id)
-      if(store.getters.isLogIn === true){
-        axios.post(`http://localhost:4941/api/v1/events/${id}/attendees`,{
-          "attendeeId": localStorage.getItem("userId"),
-          "firstName": store.getters.isFirstName,
-          "lastName": store.getters.isLastName,
-          "dateOfInterest":strings,
-          "status": "accepted"
-        }).then(response=>{
-          if(response.status === 200){
-            alert(" Join Successfully")
-          }
-          if(response.status == 403){
-            alert("You already Joined")
-          }
-        })
-      }else{
-        this.$router.push({path:'/login'})
-        //this.$router.push({ name: 'name', query: { redirect: '/path' } });
-      }
-
-    },
 
     pageChange(pageNumber){
       this.displayLists = this.lists.slice(this.pageSize*(pageNumber - 1),this.pageSize * (pageNumber));
@@ -205,12 +172,9 @@ color:#ff5252
   height: 150px;
 }
 
-.btn-box{
-  display: flex;
-}
+
 
 .btn-join{
-  display: block;
-  float: right;
+
 }
 </style>
