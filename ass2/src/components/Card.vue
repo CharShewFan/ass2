@@ -6,9 +6,9 @@
           <v-img
               class="align-end imgText"
               height="200px"
-              :src="this.URL"
+              :src="`http://localhost:4941/api/v1/events/${this.$route.params.id}/image`"
           >
-            <v-card-title class="white--text ">{{event.title}}</v-card-title>
+            <v-card-title class="white--text cardTitle">{{event.title}}</v-card-title>
           </v-img>
 
           <v-card-subtitle class="pb-4" >Event ID: {{event.id}}</v-card-subtitle>
@@ -62,19 +62,18 @@ name: "Card",
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
         "Social","Career & Business"
       ]
-
-      for(let i = 0; i < categories.length; i++){
-        if(typeof(categories[i]) == "number"){
-          for(let j = 1; j <24; j++){
-            if(categories[i] === j){
-              categories[i] = categoriesList[j - 1]
+      if(categories.length !== undefined){
+        for(let i = 0; i < categories.length; i++){
+          if(typeof(categories[i]) == "number"){
+            for(let j = 1; j <24; j++){
+              if(categories[i] === j){
+                categories[i] = categoriesList[j - 1]
+              }
             }
           }
         }
+        return categories.toString()
       }
-      return categories.toString()
-
-      //123
 
     },
 
@@ -82,7 +81,6 @@ name: "Card",
 
     toDate(date){
       let stringList = date.slice(0,-5).split("T")
-      //console.log(stringList)
       return "Date:  "+  stringList[0]+"  "+"Time:"+"  "+stringList[1]
     },
 
@@ -97,7 +95,7 @@ name: "Card",
 
   },
   props:{
-      event:Object,
+      event:{},
       btnName:String,
       btnName2:String,
       hidddJoinBtn:Boolean
@@ -108,12 +106,10 @@ name: "Card",
   },
 
   mounted(){
-    this.getImage()
   },
 
   watch:{
     '$route.params.id': function () {
-      this.getImage()
 
     }
   },
@@ -177,16 +173,6 @@ name: "Card",
     },
 
 
-    //get event image
-    getImage(){
-      let id = this.$route.params.id
-      axios.get(`http://localhost:4941/api/v1/events/${id}/image`, {responseType: 'arraybuffer'}).then(response=>{
-        const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
-        this.URL = url
-        console.log(this.URL)
-      }).catch(e=>{
-      console.log(e)})
-    }
 
 
   }
@@ -194,5 +180,16 @@ name: "Card",
 </script>
 
 <style scoped>
+.cardTitle{
+  background-color: rgba(256,256,256,0.5);
+}
 
+img{
+  filter: blur(10px);
+  -webkit-filter: blur(10px);
+}
+
+a{
+  color: white;
+}
 </style>

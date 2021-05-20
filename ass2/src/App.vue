@@ -11,7 +11,6 @@
 </template>
 
 <script>
-//import HelloWorld from './components/HelloWorld';
 import NavBar from './components/NavBar';
 import Footer from '@/components/Footer'
 import {mapGetters,mapActions} from 'vuex';

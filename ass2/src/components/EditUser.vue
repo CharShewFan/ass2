@@ -26,11 +26,12 @@
     </v-col>
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
-      <p class="text-caption">Upload Profile Image</p>
+
 
       <label for="file">Upload Image File</label>
       <div><input type="file" id="file"  ref="file" @change="processFile()"/></div>
-      <v-btn @click="rmProfileImg">Remove Profile Image</v-btn>
+      <div class="mt-5"><v-btn @click="rmProfileImg" class="warning">Remove Profile Image</v-btn></div>
+
 
     </v-col>
 

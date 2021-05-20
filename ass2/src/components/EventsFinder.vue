@@ -117,7 +117,6 @@
         categories: [],
         cateItem: [],
         cateID:[]
-
       }),
 
         mounted() {
@@ -125,10 +124,7 @@
         },
 
         methods: {
-
-
           search() {
-
             //category -> category ID
             console.log(this.categories)
             this.categories.forEach(item=>{
@@ -173,10 +169,12 @@
             console.log(params.toString());
 
             //axios request
-            axios.get('/events', {params})
+            axios.get('http://localhost:4941/api/v1/events', {params})
             .then(response=>{
               console.log(response.data)
               this.$store.dispatch("searchFeedBack",response.data)
+            }).catch(e=>{
+              console.log(e)
             })
           },
 

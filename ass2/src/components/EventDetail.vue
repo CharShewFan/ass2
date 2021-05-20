@@ -1,6 +1,6 @@
 <template>
 <div>
-  <Card :event="this.event" btnName="Collapse" btn-name2="Join" :hiddd-join-btn="this.expried"></Card>
+  <Card :event="this.event" btnName="Collapse" btn-name2="Join" :hiddd-join-btn="this.expired"></Card>
 </div>
 
 </template>
@@ -14,9 +14,9 @@ export default {
 name: "EventDetail",
   data(){
   return {
-    event:Object,
+    event:{},
     status:"",
-    expried:Boolean
+    expired:false
   }
   },
   components: {
@@ -26,7 +26,6 @@ name: "EventDetail",
   watch:{
     '$route.params.id': function () {
       this.getEventDetail()
-
     }
   },
 
@@ -37,7 +36,7 @@ name: "EventDetail",
   },
 
   updated() {
-    //this.getEventDetail()
+
   },
 
 
@@ -52,7 +51,7 @@ name: "EventDetail",
       this.event = response.data;
       console.log(response.data)
       console.log(typeof (this.event.categories))
-      this.checkExpried()
+      this.checkExpired()
     }).catch(err=>{
       console.log(err)
     })
@@ -60,15 +59,10 @@ name: "EventDetail",
 
     //date: "2021-05-05T19:00:00.000Z"
 
-    checkExpried(){
-   // console.log("hhhhhh")
-     // console.log(this.event.date)
+    checkExpired(){
       const eventDate = new Date(this.event.date)
       const now = new Date()
-      this.expried = !(now - eventDate > 0)
-      //console.log(now - eventDate)
-     // console.log(this.expried)
-      //console.log("hhhhhh")
+      this.expired = !(now - eventDate > 0)
     }
 
 

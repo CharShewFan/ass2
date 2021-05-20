@@ -51,12 +51,6 @@ const actions = {
         }).catch(err=>{console.log(err)})
     },
 
-    // async getUserImage({commit,id}){
-    //     const response = await axios.get(`/users/${id}/image`)
-    //     if(response.status === 200){
-    //         commit
-    //     }
-    // },
 
     async getName({commit},id){
         axios.defaults.headers.common['X-Authorization'] = localStorage.getItem('token')

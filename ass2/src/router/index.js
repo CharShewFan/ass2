@@ -81,7 +81,7 @@ const routes = [
   {
     path:'/event/:id',
     component: Event,
-    name:"Event",
+    name:"EventId",
     children:[
       {
         path:'',

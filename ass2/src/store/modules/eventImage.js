@@ -24,8 +24,6 @@ const  actions = {
                   tempList.push({"id": i, "link": "require('../assets/userProfileImg.jpeg')"})
                   console.log(e)
               })
-
-
             }
 
 

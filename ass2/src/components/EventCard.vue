@@ -5,14 +5,13 @@
 
   <v-row>
     <v-col sm="12" md="4" lg="3" xl="3"  v-for="event in displayLists" :key="event.index" >
-      <v-card >
+      <v-card>
         <v-img
             class="align-end imgText"
             height="200px"
-            src="blob:http://localhost:8080/5920381e-4cd2-499e-81af-a7e7affdcaf1"
-
+            :src="`http://localhost:4941/api/v1/events/${event.eventId}/image`"
         >
-          <v-card-title @click="toTop"><router-link :to="`/event/${event.eventId}/detail`" > {{event.title}}</router-link></v-card-title>
+          <v-card-title @click="toTop" class="cardTitle"><router-link :to="`/event/${event.eventId}/detail`" > {{event.title}}</router-link></v-card-title>
         </v-img>
 
         <v-card-subtitle class="pb-4" >Event ID: {{event.eventId}}</v-card-subtitle>
@@ -22,7 +21,6 @@
           <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
           <div>attendants: {{event.numAcceptedAttendees}}</div>
           <div>categories: {{ event.categories | convert}}</div>
-
         </v-card-text>
 
         <v-card-actions class="btn-box">
@@ -64,9 +62,9 @@
 <script>
 
 
-//import axios from "axios";
-//import store from "../store"
+
 import {mapActions,mapGetters} from "vuex"
+
 
 export default {
   //name: "EventCard",
@@ -81,7 +79,6 @@ export default {
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
         "Social","Career & Business"
       ]
-      //console.log(categories)
       categories.forEach((id)=>{
         if(typeof(id) == "number"){
           for(let i = 1; i <24; i++){
@@ -91,49 +88,42 @@ export default {
           }
         }
       })
-
       return categories.toString()
     }
   },
 
   data(){
     return{
-
       show: false,
-      length:0,
+
       lists :[],
       page:1,
       displayLists:[],
+      length:0,
       cateList:[],
       pageSize:10,
       categoriesList:["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
         "Learning","Photography","Food & Drink","Writing","Language & Culture",
         "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
           "Social","Career & Business"
-      ]
+      ],
     }
   },
 
-
-  beforeMount() {
+  created() {
     this.getEvents();
     this.getName(localStorage.getItem("userId"))
+
   },
 
-  updated() {
-    this.getEvents()
-  },
 
-  mounted:function() {
-    this.getEvents()
+  mounted() {
     this.getCategories()
     this.getName(localStorage.getItem("userId"))
-    //this.reqImage()
-
-
+    console.log(this.$store.getters.allEvents)
     this.lists = this.$store.getters.allEvents
     this.length = Math.ceil(this.lists.length / this.pageSize);
-    this.displayLists = this.lists.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page));
+    this.displayLists = this.lists.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page))
   },
 
   computed:{
@@ -142,20 +132,25 @@ export default {
     },
     ...mapGetters(['getUpdate']),
 
+
+  },
+
+
+  watch:{
   },
 
   methods:{
     ...mapActions(["getCategories","getEvents","getName","reqImage"]), // this VueX action retrieve event data from server
-
-
+    toTop () {
+      this.$vuetify.goTo(0)
+    },
 
     pageChange(pageNumber){
       this.displayLists = this.lists.slice(this.pageSize*(pageNumber - 1),this.pageSize * (pageNumber));
     },
 
-    toTop () {
-      this.$vuetify.goTo(0)
-    }
+
+
 
 
 
@@ -173,6 +168,11 @@ color:#ff5252
 .textCard{
   height: 150px;
 }
+
+.cardTitle{
+  background-color: rgba(256,256,256,0.8);
+}
+
 
 
 

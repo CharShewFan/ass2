@@ -9,6 +9,7 @@
         <v-chip class="mr-5 orange" >
             <router-link to="/addEvent">Creat Event</router-link>
         </v-chip>
+
       <router-view></router-view>
     <EventCard></EventCard>
 
@@ -33,7 +34,6 @@
             }
         },
         components:{
-
             EventFinder,
             EventCard
         },
