@@ -120,8 +120,8 @@ export default {
   mounted() {
     this.getCategories()
     this.getName(localStorage.getItem("userId"))
-    console.log(this.$store.getters.allEvents)
-    this.lists = this.$store.getters.allEvents
+    console.log(this.$store.getters.allEvents())
+    this.lists = this.$store.getters.allEvents()
     this.length = Math.ceil(this.lists.length / this.pageSize);
     this.displayLists = this.lists.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page))
   },

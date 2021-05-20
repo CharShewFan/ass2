@@ -12,6 +12,7 @@
 
 
 
+
     <div class="box" >
       <v-form class="my-10">
       <v-text-field label="E-mail*" type="email" clearable outlined v-model="email"></v-text-field>

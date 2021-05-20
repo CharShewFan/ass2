@@ -11,7 +11,9 @@ const state = {
 }
 const getters = {
     allEvents:function (state){
-        return state.events
+        return ()=>{
+            return state.events
+        }
     },
    // allEvents:(state)=>state.events,
     displayEvents:(state)=>state.eventForDisplay,

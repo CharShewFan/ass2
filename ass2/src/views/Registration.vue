@@ -7,7 +7,8 @@
       >
         {{errorMessages}}
       </v-alert>
-      <v-card flat>
+
+      <v-card flat class="my-10">
         <v-card-title>
           Sign Up
         </v-card-title>
@@ -15,58 +16,60 @@
 
     <v-form class="ml-3">
       <v-text-field
-        v-model="firstname"
-        :counter="10"
-        label="first name"
-        required
-        @input="$v.firstname.$touch()"
-        @blur="$v.firstname.$touch()"
+          outlined
+          v-model="firstname"
+          :counter="10"
+          label="first name"
+          required
+          @input="$v.firstname.$touch()"
+          @blur="$v.firstname.$touch()"
       ></v-text-field>
 
       <v-text-field
-      v-model="lastname"
-      :counter="10"
-      label="last name"
-      required
-      @input="$v.lastname.$touch()"
-      @blur="$v.lastname.$touch()"
+          outlined
+          v-model="lastname"
+          :counter="10"
+          label="last name"
+          required
+          @input="$v.lastname.$touch()"
+          @blur="$v.lastname.$touch()"
     ></v-text-field>
 
       <v-text-field
-        v-model="email"
-        :error-messages="emailErrors"
-        label="E-mail"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
+          outlined
+          v-model="email"
+          :error-messages="emailErrors"
+          label="E-mail"
+          required
+          @input="$v.email.$touch()"
+          @blur="$v.email.$touch()"
       ></v-text-field>
 
       <v-text-field
-      v-model="password"
-      label="Password"
-      required
-      @input="$v.password.$touch()"
-      @blur="$v.password.$touch()"
-      type = "password"
+          outlined
+          v-model="password"
+          label="Password"
+          required
+          @input="$v.password.$touch()"
+          @blur="$v.password.$touch()"
+          type = "password"
     ></v-text-field>
 
 
-      <v-row class="ml-10">
+      <v-row>
         <v-col>
-          <v-btn class="mr-4 primary" @click="submit">submit</v-btn>
+          <div>
+            <v-btn type="button" class="d-inline-block float-right" @click="$router.go(-1)">back</v-btn>
+            <v-btn class="mr-4 primary d-inline-block float-right ml-5" @click="submit">submit</v-btn>
+            <v-btn class="warning d-inline-block float-left" @click="clear">clear</v-btn>
+          </div>
         </v-col>
 
-        <v-col>
-          <v-btn class="warning" @click="clear">clear</v-btn>
-        </v-col>
 
       </v-row>
       <v-row class="ml-10">
-        <v-col>    <v-btn class="info" to="/login">sign in</v-btn></v-col>
-
-
-      <v-col>      <v-btn type="button" @click="$router.go(-1)">back</v-btn>
-      </v-col>
+        <v-col>
+        </v-col>
       </v-row>
       <!--返回上一页-->
     </v-form>

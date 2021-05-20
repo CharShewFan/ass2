@@ -4,9 +4,10 @@
       <v-col sm="12" md="4" lg="3" xl="3">
         <v-card>
           <v-img
-              class="align-end imgText"
+              class="align-end imgText "
               height="200px"
               :src="`http://localhost:4941/api/v1/events/${this.$route.params.id}/image`"
+
           >
             <v-card-title class="white--text cardTitle">{{event.title}}</v-card-title>
           </v-img>
@@ -192,4 +193,6 @@ img{
 a{
   color: white;
 }
+
+
 </style>

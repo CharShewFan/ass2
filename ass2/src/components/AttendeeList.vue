@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="my-10">
 
     <div v-show="hide">
     <h3 class="mt-16 mb-10" >Attendee List</h3>
@@ -11,19 +11,26 @@
         <v-banner
             elevation="10"
         >
-        <h4 class="mb-3">Attendee ID : {{attendee.attendeeId}}</h4>
-        <h4 class="mb-1">Attendee name: {{attendee.firstName}}  {{attendee.lastName}}</h4>
-        <h5>Interested Date:  {{attendee.dateOfInterest | toDate()}}</h5>
+          <div class="float-right d-flex align-center profileBox" >
+            <v-avatar class="bg"><v-img :src="`http://localhost:4941/api/v1/users/${attendee.attendeeId}/image`"></v-img></v-avatar>
+          </div>
 
-        <h5 class="mb-2">Join Status:  {{attendee.status}}</h5>
+          <v-spacer></v-spacer>
+          <div class="float-left">
+          <h4 class="mb-3">Attendee ID : {{attendee.attendeeId}}</h4>
+          <h4 class="mb-1">Attendee name: {{attendee.firstName}}  {{attendee.lastName}}</h4>
+          <h5>Interested Date:  {{attendee.dateOfInterest | toDate()}}</h5>
+          <h5 class="mb-2">Join Status:  {{attendee.status}}</h5>
+          </div>
         </v-banner>
         <v-divider></v-divider>
       </li>
 
     </ul>
     </div>
-       <div class="mt-5 ">  <v-btn class="primary " @click="toggle">Hide/Show the Attendee</v-btn></div>
-    {{this.attendeeId}}
+       <div class="my-10 ">
+         <v-btn class="primary d-block float-right backBtn" to="/event">back</v-btn>
+       </div>
   </div>
 </template>
 
@@ -94,7 +101,8 @@ export default {
         this.attendeeId.push(item.attendeeId)
        console.log(this.attendeeId)
       })
-    }
+    },
+
 
   },
 
@@ -117,5 +125,21 @@ export default {
 <style scoped>
 li{
   list-style-type:none
+}
+
+.profileBox{
+  height: 104px;
+}
+
+.bg{
+  background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+  //background-color: darkgrey;
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.backBtn{
+  line-height: 36px;
 }
 </style>

@@ -9,7 +9,7 @@
                         v-model="title"
                         label="Title:"
                         required
-                        solo
+                        outlined
                     >
                 </v-text-field>
                 </v-col>
@@ -18,7 +18,7 @@
                         v-model="description"
                         label="description"
                         required
-                        solo
+                        outlined
                     >
                 </v-text-field>
                 </v-col>
@@ -27,7 +27,7 @@
                         v-model="url"
                         label="url"
                         required
-                        solo
+                        outlined
                     >
                 </v-text-field>
                 </v-col>
@@ -36,7 +36,7 @@
                         v-model="capacity"
                         label="capacity"
                         required
-                        solo
+                        outlined
                     >
                 </v-text-field>
                 </v-col>
@@ -46,7 +46,7 @@
                         v-model="fee"
                         label="fee"
                         required
-                        solo
+                        outlined
                     >
                 </v-text-field>
                 </v-col>
@@ -56,36 +56,48 @@
                     chips
                     clearable
                     deletable-chips
-                    filled
                     multiple
-
                     small-chips
-                    solo
+                    outlined
                     v-model="catogories"
                     :items = items
                     item-value = item.value
                     item-text = item.id
-                    label = "categories"
+                    label = "categories *(require)"
                     >
 
                     </v-autocomplete>
                 </v-col>
 
-                <v-col sm="12" md="6" lg="4" xl="3">
-                   <v-btn @click="add()" color="primary" float="right">Add Event</v-btn>
-                </v-col>
+              <v-col sm="12" md="6" lg="4" xl="3">
+                <v-select
+                    :items="items"
+                    label="Online ?"
+                    outlined
+                ></v-select>
+              </v-col>
+
+
+              <v-col sm="12" md="6" lg="4" xl="3">
+                <v-text-field
+                    v-model="location"
+                    label="Location"
+
+                    outlined
+                >
+                </v-text-field>
+              </v-col>
+
+              <v-col sm="12" md="6" lg="4" xl="3">
+                <v-date-picker v-model="picker"></v-date-picker>
+              </v-col>
 
                 <v-col sm="12" md="6" lg="4" xl="3">
-                    <v-date-picker v-model="picker"></v-date-picker>
+                   <v-btn @click="add()" color="primary" class="float-right">Add Event</v-btn>
                 </v-col>
 
-                <v-col sm="12" md="6" lg="4" xl="3">
 
-                </v-col>
 
-                <v-col sm="12" md="6" lg="4" xl="3">
-
-                </v-col>
             </v-row>
         </v-container>
     </v-form>
