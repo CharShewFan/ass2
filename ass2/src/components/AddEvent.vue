@@ -41,7 +41,7 @@
                 </v-text-field>
                 </v-col>
 
-                <v-col sm="12" md="6" lg="4" xl="3">
+                <v-col sm="12" md="6" lg="4" xl="3" cols="12">
                     <v-text-field 
                         v-model="fee"
                         label="fee"
@@ -144,8 +144,6 @@
                 online:"",
                 time:"",
                 controls:""
-
-           
         }),
 
         beforeMount(){

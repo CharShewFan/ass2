@@ -32,6 +32,7 @@
             <p>{{event.description}}</p>
 
           </v-card-text>
+          <a href=""></a>
 
           <v-card-actions class="btn-box">
             <v-btn color="primary"  to="/event" >{{this.btnName}}</v-btn>

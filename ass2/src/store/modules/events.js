@@ -5,10 +5,13 @@ const state = {
     events:[],
     eventForDisplay:[],
     count:0,
-    pageLength:0
+    pageLength:0,
+    hosted:[]
 
 
 }
+
+
 const getters = {
     allEvents:function (state){
         return ()=>{
@@ -16,14 +19,16 @@ const getters = {
         }
     },
 
-   // allEvents:(state)=>state.events,
     displayEvents:(state)=>state.eventForDisplay,
     count:(state)=>state.events.length,
 
-    // calPageLen:function (state){
-    //     let pageSize = 10
-    //     return state.pageLength = Math.ceil(this.state.events.length / pageSize);
-    // }
+    getHosted:function(state){
+        return()=>{
+            return state.hosted
+        }
+    }
+
+
 } //retrieve value/new state from state
 
 
@@ -55,9 +60,20 @@ const actions = {
 
     searchFeedBack({commit},playLoad){
         commit("setReNew",playLoad)
+    },
+
+    hostedEvent({commit}){
+        let userID = localStorage.getItem("userId")
+        axios.get(`http://localhost:4941/api/v1/events?organizerId=${userID}`).then(response=>{
+            commit("setHosted",response.data)
+        })
+
+
     }
 
-} //send mutation change commit to mutation
+}
+
+//send mutation change commit to mutation
 
 const mutations = {
     
@@ -67,6 +83,10 @@ const mutations = {
     },
     setDisplayEvents(state,selectedEvents){
         return state.eventForDisplay = selectedEvents
+    },
+
+    setHosted(state,hostedEvent){
+        return state.hosted = hostedEvent
     }
 
 }
