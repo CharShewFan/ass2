@@ -110,14 +110,9 @@ import store from "../store"
           URL: require('../assets/userProfileImg.jpeg')
         }),
 
-      beforeCreate() {
-
-      },
 
       beforeMount() {
-        this.getUserInfo(localStorage.getItem("userId"))
         this.match()
-        this.getUserImage()
       },
 
       computed:{
@@ -126,9 +121,6 @@ import store from "../store"
 
       },
 
-      updated() {
-
-      },
 
       mounted() {
         this.getUserInfo(localStorage.getItem("userId"))
@@ -141,8 +133,6 @@ import store from "../store"
         },
         methods:{
           async getInfo(){
-
-
               this.id = localStorage.getItem("userId")
               console.log(this.id)
 
@@ -154,9 +144,7 @@ import store from "../store"
                 this.email = response.data.email
                 this.firstName = response.data.firstName
                 this.lastName = response.data.lastName
-                // console.log(this.email)
-                // console.log(this.firstName)
-                // console.log(response)
+
               }).catch(err=>{
                 console.log(err)
               })

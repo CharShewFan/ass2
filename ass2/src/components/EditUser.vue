@@ -1,11 +1,9 @@
 <template>
   <div>
 
-
-
-    <v-card flat class="mt-8">
-      <v-card-title>Edit User Info</v-card-title>
-    </v-card>
+    <div class="d-flex align-center mt-15 mb-10">
+      <h2 class="mx-auto text--primary">Edit User Information</h2>
+    </div>
   <v-form class="ml-3">
 <v-container>
   <v-row>
@@ -27,10 +25,13 @@
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
 
+      <v-banner elevation="5">
+        <label for="file" class="d-inline-block mb-3 text--primary">Upload Image File</label>
+        <div><input type="file" id="file"  ref="file" @change="processFile()"/></div>
+      </v-banner>
 
-      <label for="file">Upload Image File</label>
-      <div><input type="file" id="file"  ref="file" @change="processFile()"/></div>
-      <div class="mt-5"><v-btn @click="rmProfileImg" class="warning">Remove Profile Image</v-btn></div>
+
+      <div class="mt-5"><v-btn @click="rmProfileImg" class="warning d-inline-block float-right">Remove Profile Image</v-btn></div>
 
 
     </v-col>
@@ -38,7 +39,7 @@
 
 
     <v-col cols="12" sm = "12" md = "12" lg = "12" xl="12">
-      <v-btn @click = "submit()" class="primary right">Submit</v-btn>
+      <v-btn @click = "submit()" class="primary d-inline-block float-right">Submit</v-btn>
     </v-col>
 
   </v-row>

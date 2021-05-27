@@ -19,6 +19,7 @@
           <v-btn class="green mt-5 mr-10 d-inline-block" @click="change(1,attendee.attendeeId)">accept</v-btn>
           <v-btn class="warning mt-5 mr-10 d-inline-block" @click="change(2,attendee.attendeeId)">pending</v-btn>
           <v-btn class="error mt-5 mr-10 d-inline-block" @click="change(3,attendee.attendeeId)">rejected</v-btn>
+<!--          <v-btn class=" mt-5 mr-10 d-inline-block" @click="back">back</v-btn>-->
         </div>
       </v-banner>
     </div>
@@ -84,6 +85,9 @@ name: "OrganizeAttandees",
         console.log(err)
         alert(err)
       })
+    },
+    back(){
+      this.$route.push({path:"/manageEvent"})
     }
   }
 }
