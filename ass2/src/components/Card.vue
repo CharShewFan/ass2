@@ -12,8 +12,9 @@
             <v-card-title class="cardTitle">{{event.title}}</v-card-title>
           </v-img>
 
-          <v-card-subtitle class="pb-4" >Event ID: {{event.id}}</v-card-subtitle>
-
+          <v-card-subtitle class="pb-6 pt-6" >Event ID: {{event.id}}
+            <v-avatar class="d-inline-block float-right" size="48px"><img :src="`http://localhost:4941/api/v1/users/${event.organizerId}/image}`" alt="profile" class="profile"></v-avatar>
+          </v-card-subtitle>
           <v-card-text class="text--primary textCard" >
             <div>capacity: {{event.capacity}}</div>
             <div>organizer: {{event.organizerFirstName}} {{event.organizerLastName}}</div>
@@ -196,6 +197,13 @@ a{
 }
 
 .imgText{
+  background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+
+.profile{
   background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
   background-size:     cover;                      /* <------ */
   background-repeat:   no-repeat;
