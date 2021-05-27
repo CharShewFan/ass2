@@ -10,6 +10,7 @@
             class="align-end imgText"
             height="200px"
             :src="`http://localhost:4941/api/v1/events/${event.eventId}/image`"
+
         >
           <v-card-title @click="toTop" class="cardTitle"><router-link :to="`/event/${event.eventId}/detail`" > {{event.title}}</router-link></v-card-title>
         </v-img>
@@ -177,7 +178,12 @@ export default {
 
 <style scoped>
 .imgText{
-color:#ff5252
+  color:#ff5252;
+  background-image: url('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png');
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
+
 }
 
 .textCard{
