@@ -40,7 +40,7 @@
             <v-pagination
                 v-model="page"
                 class="my-4"
-                :length="length"
+                :length="lengths"
                 @input="pageChange"
             ></v-pagination>
           </v-container>
@@ -64,7 +64,6 @@
 
 
 import {mapActions,mapGetters} from "vuex"
-
 
 export default {
   //name: "EventCard",
@@ -95,11 +94,10 @@ export default {
   data(){
     return{
       show: false,
-
-      lists :[],
+      lists :this.$store.getters.allEvents(),
       page:1,
       displayLists:[],
-      length:0,
+      lengths:0,
       cateList:[],
       pageSize:10,
       categoriesList:["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
@@ -113,17 +111,14 @@ export default {
   created() {
     this.getEvents();
     this.getName(localStorage.getItem("userId"))
-
   },
 
 
   mounted() {
+
     this.getCategories()
     this.getName(localStorage.getItem("userId"))
-    console.log(this.$store.getters.allEvents())
-    this.lists = this.$store.getters.allEvents()
-    this.length = Math.ceil(this.lists.length / this.pageSize);
-    this.displayLists = this.lists.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page))
+
   },
 
   computed:{
@@ -132,12 +127,32 @@ export default {
     },
     ...mapGetters(['getUpdate']),
 
+    check(){
+      return this.$store.getters.allEvents()
+    }
+
 
   },
-
 
   watch:{
+    deep:true,
+    // eslint-disable-next-line no-unused-vars
+    check(newVal,oldVal){
+      //console.log(newVal,"oldVal"+oldVal)
+      this.lengths = Math.ceil(newVal.length / this.pageSize);
+      this.displayLists = newVal.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page))
+    },
+
+    lists:{
+      deep:true,
+      handler(){
+        this.lengths = Math.ceil(this.lists.length / this.pageSize);
+        this.displayLists = this.lists.slice(this.pageSize * (this.page - 1), this.pageSize * (this.page))
+      }
+
+    }
   },
+
 
   methods:{
     ...mapActions(["getCategories","getEvents","getName","reqImage"]), // this VueX action retrieve event data from server

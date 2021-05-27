@@ -29,6 +29,10 @@ export default {
     }
   },
 
+  created() {
+    //this.$store.dispatch("getEvents")
+  },
+
   mounted() {
     this.checkLoginStatus()
   },

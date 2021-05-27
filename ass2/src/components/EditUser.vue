@@ -109,9 +109,13 @@ export default {
             url: `http://localhost:4941/api/v1/users/${userId}/image`
           }
           axios(options).then(response => {
-            console.log(response)
+            //console.log(response)
+            if(response.status === 201 || response.status === 200){
+              alert("set up profile image success")
+            }
           }).catch(err => {
-            console.log(err)
+            //console.log(err)
+            alert(err)
           })
         }
 
@@ -120,9 +124,6 @@ export default {
 
      processFile () {
        this.file = this.$refs.file.files[0]
-       console.log(this.file)
-       console.log("-----------")
-
     },
 
   //remove user image file
@@ -137,7 +138,8 @@ export default {
           this.$route.push({path:"/userInfo"})
         }
       }).catch(error=>{
-          console.log(error)
+          //console.log(error)
+        alert(error)
       })
     }
   }

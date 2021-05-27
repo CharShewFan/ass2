@@ -154,9 +154,9 @@ import store from "../store"
                 this.email = response.data.email
                 this.firstName = response.data.firstName
                 this.lastName = response.data.lastName
-                console.log(this.email)
-                console.log(this.firstName)
-                console.log(response)
+                // console.log(this.email)
+                // console.log(this.firstName)
+                // console.log(response)
               }).catch(err=>{
                 console.log(err)
               })
@@ -174,12 +174,10 @@ import store from "../store"
             this.id = localStorage.getItem("userId")
             axios.get(`http://localhost:4941/api/v1/users/${this.id}/image`,{responseType:'arraybuffer'}).then(response=>{
               if(response.status === 200){
-                // console.log(response.headers)
-                // console.log(response.status)
-                // console.log(response.data)
+
                 const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
                 this.URL = url
-               console.log(url)
+               //console.log(url)
               }
             }).catch(error=>{
               // console.log("error catch")

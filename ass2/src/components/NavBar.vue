@@ -29,7 +29,7 @@
       color = "primary"
 
     >
-      <img :src="this.imageSrc" alt="avatar" :key="this.imageSrc">
+      <img :src="`http://localhost:4941/api/v1/users/${this.userId}/image`" alt="avatar" :key="this.imageSrc">
     </v-avatar>
    </v-btn>
 
@@ -102,6 +102,7 @@
             {"title":"User","link":"/userInfo"},
             {"title":"Edit","link":"/editUser"},
           ],
+        userId:localStorage.getItem("userId"),
 
         imageSrc: require('../assets/userProfileImg.jpeg')
       }),

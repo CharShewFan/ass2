@@ -47,6 +47,7 @@
                         label="fee"
                         required
                         outlined
+                        prefix="$"
                     >
                 </v-text-field>
                 </v-col>
@@ -59,10 +60,8 @@
                     multiple
                     small-chips
                     outlined
-                    v-model="catogories"
+                    v-model="categories"
                     :items = items
-                    item-value = item.value
-                    item-text = item.id
                     label = "categories *(require)"
                     >
 
@@ -71,18 +70,27 @@
 
               <v-col sm="12" md="6" lg="4" xl="3">
                 <v-select
-                    :items="items"
+                    :items="onlineCheckBox"
                     label="Online ?"
                     outlined
+                    v-model="online"
+                ></v-select>
+              </v-col>
+
+              <v-col sm="12" md="6" lg="4" xl="3">
+                <v-select
+                    :items="onlineCheckBox"
+                    label="attendant control ?"
+                    outlined
+                    v-model="controls"
                 ></v-select>
               </v-col>
 
 
-              <v-col sm="12" md="6" lg="4" xl="3">
+              <v-col sm="12" md="12" lg="12" xl="12">
                 <v-text-field
                     v-model="location"
                     label="Location"
-
                     outlined
                 >
                 </v-text-field>
@@ -92,12 +100,18 @@
                 <v-date-picker v-model="picker"></v-date-picker>
               </v-col>
 
+              <v-col sm="12" md="6" lg="4" xl="3" >
+                <v-time-picker
+                    format="24hr"
+                    landscape
+                    v-model="time"
+                >
+                </v-time-picker>
+              </v-col>
+
                 <v-col sm="12" md="6" lg="4" xl="3">
                    <v-btn @click="add()" color="primary" class="float-right">Add Event</v-btn>
                 </v-col>
-
-
-
             </v-row>
         </v-container>
     </v-form>
@@ -115,13 +129,22 @@
                 title:"",
                 description:"",
                 url:"",
-                capacity:"",
+                capacity:0,
                 fee:"",
-                venue:"",
-                items:["aniaml","human right" ,"earthquake","forest"],
-                catogories:[],
+                items:["Outdoors & Adventure","Tech","Family","Health & Wellness","Sports & Fitness",
+                  "Learning","Photography","Food & Drink","Writing","Language & Culture",
+                  "Music","Movements","LGBTQ","Film","Sci-Fi & Games","Beliefs","Arts","Book clubs","Dance","Pets","Hobbies & Crafts","Fashion & Beauty",
+                  "Social","Career & Business"
+                ],
+                onlineCheckBox:["Yes","No"],
+                categories:[],
                 //picker:""
                 picker: new Date().toISOString().substr(0, 10),
+                location:"",
+                online:"",
+                time:"",
+                controls:""
+
            
         }),
 
@@ -132,7 +155,7 @@
         methods:{
             getCate(){
                 axios.get("http://localhost:4941/api/v1/events/categories").then((response)=>{
-                    console.log(response.data)
+                   // console.log(response.data)
                     this.catogories.push(response)
                 }).catch((e)=>{
                     console.log(e)
@@ -140,28 +163,104 @@
                 )
             },
 
+          // "title": "Film Club",
+          // "description": "Meetup with others to watch interesting movies.",
+          // "venue": "Haere-roa",
+          // "categoryIds": [14,17,23],
+          // "date": "2021-07-02 18:25:00"
             add(){
-
-            if (this.title !== "" && this.description !== "" && this.picker !== ""){
-                axios.post(   
-                    "/event",{
-                    "q":this.query,
-                    "categoryid":this.cid_1,
-                    "categoryid2":this.cid_2,
-                    "startIndex":this.startIndex,
-                    "count":this.count,
-                    "sortBy":this.sortBy
-                }).then((response) =>{
-                    console.log(response)
-                }).catch((e)=>{
-                    console.log(e)
-                })
-            }else{
-                alert("please fill in the require files")
-            }
+              axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token");
+              //sort categories
+              let cateArray = []
+              for(let i = 0 ; i < this.categories.length ; i ++){
+                //console.log(this.categories[i])
+                cateArray.push(this.items.indexOf(this.categories[i])+1)
+              }
+              //console.log(cateArray)
+              //sort dates
+              let dates = this.picker +" " + this.time + ":"+"00"
 
 
+4
+              if(this.title !== "" && this.description !== "" && this.categories !== "" && this.picker !== "" && this.picker !== undefined && this.time !== undefined){
+                //on site event
+                if(this.online === "NO" || this.online === undefined){
+                  if(this.location === "" || this.location === undefined){
+                    alert("please fill a location")
+                  }else{
+                    //return 0 and 1;
+                    this.controls = this.controls === "YES";
+                    this.online = this.online === "YES";
+
+                    axios.post("http://localhost:4941/api/v1/events",{
+                      "title":this.title,
+                      "description":this.description,
+                      "venue":this.location,
+                      "categoryIds":cateArray,
+                      "date":dates,
+                      "fee":parseFloat(this.fee),
+                      "capacity":parseInt(this.capacity),
+                      "requiresAttendanceControl":this.controls,
+                      "isOnline":this.online
+                    }).then(
+                        response=>{
+                          console.log(response)
+                          alert(response)
+                        }
+                    ).catch(err=>{
+                      console.log(err)
+                      alert(err)
+                    })
+                  }
+                }else{
+                  //return 0 and 1;
+                  this.controls = this.controls === "YES";
+                  this.online = this.online === "YES";
+
+                  //online event
+                  axios.post("http://localhost:4941/api/v1/events",{
+                    "title":this.title,
+                    "description":this.description,
+                    "categoryIds":cateArray,
+                    "date":dates,
+                    "fee":parseFloat(this.fee),
+                    "capacity":parseInt(this.capacity),
+                    "requiresAttendanceControl":this.controls,
+                    "isOnline" : this.online,
+                    "venue":this.location,
+
+                  }).then(
+                      response=>{
+                        console.log(response)
+                        alert(response.data)
+                      }
+                  ).catch(err=>{
+                    console.log(err)
+                    alert(err)
+                  })
+
+                }
+              }else{
+                alert("please fill the required fields")
+              }
         },
+
+          checkData(){
+            let dates = this.picker +" " + this.time + ":"+"00"
+            console.log(this.title)
+            console.log(this.description)
+            console.log(this.url)
+            console.log(this.categories)
+            console.log(this.capacity)
+            console.log(this.fee)
+            console.log(this.time)
+            console.log(dates)
+            console.log(this.online)
+            console.log(this.picker)
+            console.log(this.location)
+
+
+          }
     }
 }
 

@@ -7,9 +7,6 @@
     <div  class="grey lighten-3 text-center banner-1 img2" >
       <v-chip class="primary mx-auto " to="/registration" >Join Now</v-chip>
     </div>
-
-
-
   </div>
   
 

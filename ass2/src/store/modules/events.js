@@ -15,14 +15,15 @@ const getters = {
             return state.events
         }
     },
+
    // allEvents:(state)=>state.events,
     displayEvents:(state)=>state.eventForDisplay,
     count:(state)=>state.events.length,
 
-    calPageLen:function (state){
-        let pageSize = 10
-        return state.pageLength = Math.ceil(this.state.events.length / pageSize);
-    }
+    // calPageLen:function (state){
+    //     let pageSize = 10
+    //     return state.pageLength = Math.ceil(this.state.events.length / pageSize);
+    // }
 } //retrieve value/new state from state
 
 
