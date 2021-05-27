@@ -162,17 +162,18 @@
             }
 
             //check params
-            console.log(params)
+            //console.log(params)
 
 
             //generate Params
-            console.log(params.toString());
+            //console.log(params.toString());
 
             //axios request
             axios.get('http://localhost:4941/api/v1/events', {params})
             .then(response=>{
               console.log(response.data)
               this.$store.dispatch("searchFeedBack",response.data)
+              this.$store.getters.allEvents()
             }).catch(e=>{
               console.log(e)
             })

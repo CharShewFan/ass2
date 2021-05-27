@@ -1,7 +1,7 @@
 <template>
 <div class="container">
 
-
+<vue-confirm-dialog></vue-confirm-dialog>
   <div class="row">
     <div class="column">
 
@@ -38,6 +38,9 @@
               <v-btn class="primary" :to="`/manageEvent/${event.eventId}/edit`">
                 edit
               </v-btn>
+<!--              <v-btn class="error float-right" @click="deleteEvent(event.eventId)" >delete</v-btn>-->
+              <v-btn class="error" @click="handleClick(event.eventId)">delete</v-btn>
+              <v-btn class="warning" :to="`/manageAttendees/${event.eventId}/edit`">manage attendees</v-btn>
             </v-card-actions>
           </v-card>
         </div>
@@ -63,7 +66,7 @@
 <script>
 
     import {mapActions} from 'vuex'
-   // import axios from 'axios'
+    import axios from 'axios'
 
     export default{
         name:"ManageEvent",
@@ -73,7 +76,6 @@
             }
         },
         components: {
-
         },
 
 
@@ -100,10 +102,36 @@
 
       methods:{
           ...mapActions(["hostedEvent"]),
-        // editEvent(id){
-        //     axios.defaults.headers.common["X-Authorization"]= localStorage.getItem("token");
-        //
-        // }
+        deleteEvent(id){
+          axios.defaults.headers.common["X-Authorization"] = localStorage.getItem("token")
+          axios.delete(`http://localhost:4941/api/v1/events/${id}`).then(res=>{
+              console.log(res)
+              alert("Delete Successfully")
+              this.hostedEvent();
+            }).catch(err=>{
+              console.log(err)
+            alert(err)
+            })
+
+        },
+
+        handleClick(id){
+            this.$confirm({
+              message:`Do You Confirm Deleting This Event ?`,
+              button:{
+                no:"No",
+                yes:"Yes"
+              },
+
+              callback:confirm =>{
+                if(confirm){
+                  this.deleteEvent(id)
+                }
+
+              }
+            })
+        }
+
       },
 
     }

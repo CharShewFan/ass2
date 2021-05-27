@@ -11,6 +11,7 @@
     "axios": "^0.21.1",
     "core-js": "^3.6.5",
     "vue": "^2.6.11",
+    "vue-confirm-dialog": "^1.0.2",
     "vue-router": "^3.2.0",
     "vuelidate": "^0.7.6",
     "vuetify": "^2.4.0",
