@@ -106,9 +106,19 @@
 
         imageSrc: require('../assets/userProfileImg.jpeg')
       }),
-      computed:mapGetters(["isLogIn"]),
+      computed:{
+        ...mapGetters(["isLogIn"]),
+        check(){
+          return  this.$store.getters.isProfileURL
+        }
+
+      },
 
       watcher:{
+        // eslint-disable-next-line no-unused-vars
+        check(newVal,oldVal) {
+          return this.imageSrc = newVal
+        }
 
       },
 
@@ -147,7 +157,6 @@
             }).catch(err=>{
               console.log(err)
             })
-
         }
 
       }

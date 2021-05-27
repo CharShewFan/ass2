@@ -3,13 +3,13 @@ axios.defaults.headers.common['X-Authorization'] = localStorage.getItem("token")
 
 
 const state = {
-  userName:"",
-  userEmail:"" ,
-    status:"",
-    firstName:"",
-    lastName:"",
-    imageData:{},
-    imageURl:"" // for the image URL send back from server
+        userName:"",
+        userEmail:"" ,
+        status:"",
+        firstName:"",
+        lastName:"",
+        imageData:{},
+        imageURl:"" // for the image URL send back from server
 }
 
 
@@ -30,6 +30,10 @@ const getters = {
 
     isLastName:(state)=>{
         return state.lastName
+    },
+
+    isProfileURL:(state)=>{
+        return state.imageURl
     }
 
 }
@@ -66,6 +70,23 @@ const actions = {
 
         }
     },
+
+    getUImage({commit}){
+        this.id = localStorage.getItem("userId")
+        axios.get(`http://localhost:4941/api/v1/users/${this.id}/image`,{responseType:'arraybuffer'}).then(response=>{
+            if(response.status === 200){
+
+                const url = window.URL.createObjectURL(new Blob([response.data],{type:['image/png','image/jpg','image/gif']}));
+
+                commit("setURl",url)
+                //console.log(url)
+            }
+        }).catch(error=>{
+            // console.log("error catch")
+            console.log(error)
+        })
+    }
+
 }
 
 const mutations = {
@@ -84,6 +105,10 @@ const mutations = {
 
     setLName(state,playLoad){
         return state.lastName = playLoad
+    },
+
+    setURL(state,playLoad){
+        return state.imageURl = playLoad
     }
 
 }

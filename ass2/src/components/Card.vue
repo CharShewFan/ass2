@@ -13,7 +13,7 @@
           </v-img>
 
           <v-card-subtitle class="pb-6 pt-6" >Event ID: {{event.id}}
-            <v-avatar class="d-inline-block float-right" size="48px"><img :src="`http://localhost:4941/api/v1/users/${event.organizerId}/image}`" alt="profile" class="profile"></v-avatar>
+            <v-avatar class="d-inline-block float-right" size="48px"><img :src="check" alt="profile" class="profile"></v-avatar>
           </v-card-subtitle>
           <v-card-text class="text--primary textCard" >
             <div>capacity: {{event.capacity}}</div>
@@ -104,23 +104,32 @@ name: "Card",
       hidddJoinBtn:Boolean
   },
 
-  computed:{
+  created() {
+    this.getProfileImage()
+  },
 
+  computed:{
+  check(){
+    return this.imageSrc
+  }
   },
 
   mounted(){
+
   },
 
   watch:{
-    '$route.params.id': function () {
-
+    // eslint-disable-next-line no-unused-vars
+    check(newVal,oldVal){
+      return this.imageSrc = newVal
     }
   },
 
   data(){
   return{
     joined:false,
-    URL:"require('../assets/userProfileImg.jpeg')"
+    URL:"require('../assets/userProfileImg.jpeg')",
+    imageSrc:""
   }
   },
 
@@ -174,6 +183,19 @@ name: "Card",
         //this.$router.push({ name: 'name', query: { redirect: '/path' } });
       }
     },
+
+    getProfileImage(){
+      let id = parseInt(this.event.organizerId)
+      console.log(id)
+      axios.get(`http://localhost:4941/api/v1/users/${id}/image`,{responseType:'arraybuffer'}).then(response=> {
+        if (response.status === 200) {
+          const url = window.URL.createObjectURL(new Blob([response.data], {type: ['image/png', 'image/jpg', 'image/gif']}));
+          this.imageSrc = url
+        }
+      }).catch(err=>{
+        console.log(err)
+      })
+    }
 
 
 
